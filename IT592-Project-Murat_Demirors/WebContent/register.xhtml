@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+			<ui:define name="pageTitle">Register</ui:define>
+		
+			<ui:define name="maincontent">
+				<div class="border_div3">
+				<h:form>
+				
+				<center>
+							<h3>User Registration</h3>
+							<h:panelGrid columns="3">
+							
+							<p:outputLabel value="Name" />
+							<p:inputText value="#{registerBean.user.name}" id="name" size="12" placeholder="Name"
+							required="true" requiredMessage="Name is missing!"/>
+							<p:message for="name" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:outputLabel value="Lastname" />
+							<p:inputText value="#{registerBean.user.lastname}" id="lname" size="12" placeholder="Lastname"
+							required="true" requiredMessage="Lastname is missing!"/>
+							<p:message for="lname" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:outputLabel value="Username" />
+							<p:inputText value="#{registerBean.user.username}" id="user" size="12" placeholder="Username"
+							required="true" requiredMessage="Username is missing!"/>
+							<p:message for="user" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:outputLabel value="Email" />
+							<p:inputText value="#{registerBean.user.email}" id="email" size="12" placeholder="E-mail"
+							required="true" requiredMessage="Email is missing!"/>
+							<p:message for="email" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:outputLabel value="Phone Number" />
+							<p:inputMask value="#{registerBean.user.phonenumber}" mask="(999) 999-99-99" id="phone" placeholder="Phone" size="12"
+					   			 required="true" requiredMessage="Phone number is missing!"/>
+							<p:message for="phone" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:outputLabel value="TC ID" />
+							<p:inputText value="#{registerBean.user.tc_id_number}" id="tc" size="12" placeholder="TC ID"
+							required="true" requiredMessage="TC ID is missing!"/>							
+							<p:message for="tc" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:outputLabel value="Shop Name" />
+							<p:inputText value="#{registerBean.shopname}" id="shop" size="12" placeholder="Shop name"
+							required="true" requiredMessage="Shop name is missing!"/>
+							<p:message for="shop" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+						
+							<p:outputLabel value="Password" />
+							<p:password value="#{registerBean.user.password}" feedback="true" id="pass" size="12" placeholder="Password"
+							required="true" requiredMessage="Password is missing!"/>
+							<p:message for="pass" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:outputLabel value="Password" />
+							<p:password value="#{registerBean.password}" feedback="true" id="pass2" size="12" placeholder="Password"
+							required="true" requiredMessage="Password is missing!"/>
+							<p:message for="pass2" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+						    
+						    
+						    <p:outputLabel value=" " />
+							<h3>Shop Address</h3>
+							<p:outputLabel value=" " />
+																					
+							
+							<p:outputLabel value="Country" />
+							<p:inputText value="#{registerBean.address.country}" placeholder="Country" id="country" required="true" requiredMessage="*"/>
+							<p:message for="country" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:outputLabel value="City" />
+							<p:inputText value="#{registerBean.address.city}" placeholder="City" id="city" required="true" requiredMessage="*"/>
+							<p:message for="city" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+						    
+						    <p:outputLabel value="District" />
+						    <p:inputText value="#{registerBean.address.district}" placeholder="District" id="district" required="true" requiredMessage="*"/>
+							<p:message for="district" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+						    
+						    <p:outputLabel value="Street" />
+						    <p:inputText value="#{registerBean.address.street}" placeholder="Street" id="street" required="true" requiredMessage="*"/>
+							<p:message for="street" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+						    
+						    <p:outputLabel value="Postcode" />
+						    <p:inputText value="#{registerBean.address.postcode}" placeholder="Postcode" id="postcode" required="true" requiredMessage="*"/>
+							<p:message for="postcode" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+				
+						
+							<h:outputText value=" " />
+							<p:commandButton action="#{registerBean.register()}" binding="#{registerBean.mybutton}" value="Register" id="button"/>
+							<h:outputText value=" " />
+
+							
+						</h:panelGrid>
+			
+				
+			    </center>
+			    <p:messages for="button" showDetail="true" closable="true">
+			        <p:autoUpdate />
+			    </p:messages>
+			    </h:form>
+			    </div>
+			</ui:define>
+	
+	
+	</ui:composition>
+</html>

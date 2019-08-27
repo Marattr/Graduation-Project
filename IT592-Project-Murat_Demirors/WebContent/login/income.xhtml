@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+		<ui:define name="pageTitle">Income</ui:define>
+		
+			<ui:define name="maincontent">			
+			<h:form>
+			
+			<p:chart type="bar" model="#{monthlyIncomeBean.barModel}" style="height:300px" responsive="true"/>
+			<hr class="custom_hr"/>
+			<p:chart type="bar" model="#{monthlyIncomeBean.barModel2}" style="height:300px" responsive="true"/>
+			
+			<center>
+			<p:selectOneMenu value="#{monthlyIncomeBean.month}" style="width:300px;" >
+				<p:ajax event="change" listener="#{monthlyIncomeBean.loadData()}" update="month"  />
+				<f:selectItem itemLabel="-- SELECT A MONTH --"  />
+	            <f:selectItem itemLabel="January" itemValue="1" />
+	            <f:selectItem itemLabel="February" itemValue="2" />	
+	            <f:selectItem itemLabel="March" itemValue="3" />
+	            <f:selectItem itemLabel="April" itemValue="4" />
+	            <f:selectItem itemLabel="May" itemValue="5" />
+	            <f:selectItem itemLabel="June" itemValue="6" />
+	            <f:selectItem itemLabel="July" itemValue="7" />
+	            <f:selectItem itemLabel="August" itemValue="8" />
+	            <f:selectItem itemLabel="September" itemValue="9" />
+	            <f:selectItem itemLabel="October" itemValue="10" />
+	            <f:selectItem itemLabel="November" itemValue="11" />
+	            <f:selectItem itemLabel="December" itemValue="12" />				           
+            </p:selectOneMenu>	                
+	        </center>
+	        
+	        <p:dataTable id="month" var="sale" value="#{monthlyIncomeBean.monthlySales}" rows="10" 
+			                 paginator="true"
+			                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			                 rowsPerPageTemplate="5,10,15"
+			                 class="font_size"
+			                 sortBy="#{sale.orderdate}"> 
+	         	<f:facet name="header">
+		            SALES
+		        </f:facet>
+	         	
+       	        <p:column headerText="Hospital">
+		            <h:outputText value="#{sale.hospital}" />
+		        </p:column>
+		        
+		        <p:column headerText="Doctor Name">
+		            <h:outputText value="#{sale.doctorName}" />
+		        </p:column>
+		        
+		        <p:column headerText="Dr.Certificate No">
+		            <h:outputText value="#{sale.doctorCode}" />
+		        </p:column>
+		        
+		        <p:column headerText="Prescription Date">
+		            <h:outputText value="#{sale.date}" />
+		        </p:column>
+		        
+		        <p:column headerText="Sales Date" >	        	
+		            <h:outputText value="#{sale.orderdate}" />
+		        </p:column>
+		        
+		        <p:column headerText="Customer Name / Lastname">
+		            <h:outputText value="#{sale.customerOrder.name} #{sale.customerOrder.lastname}" />
+		        </p:column>
+		        
+		        <p:column headerText="Customer Phone">
+		            <h:outputText value="#{sale.customerOrder.phonenumber}" />
+		        </p:column>
+		        
+		        <p:column headerText="Customer TC ID">
+		            <h:outputText value="#{sale.customerOrder.tc_id_number}" />
+		        </p:column>
+		        
+		        <p:column headerText="Total Bill">
+		        	#{monthlyIncomeBean.calculateValue(sale.totalbill)}
+		            <h:outputText value="#{sale.totalbill}" />
+		        </p:column> 
+		        <p:summaryRow>
+		            <p:column colspan="8" style="text-align:right">
+		                <h:outputText value="Daily Total:" />
+		            </p:column>
+		            <p:column>
+		                <h:outputText value="#{monthlyIncomeBean.calculatedValue}">
+		                    <f:convertNumber type="currency" currencySymbol="$" />
+		                </h:outputText>
+		            </p:column>
+		        </p:summaryRow> 		      
+		        
+		         <p:columnGroup type="footer">
+		            <p:row>
+		                <p:column colspan="8" style="text-align:right" footerText="Monthly Total:" />
+		                <p:column footerText="#{monthlyIncomeBean.totalBillAmount}$" />		 
+		            </p:row>
+		        </p:columnGroup>
+		        
+		        <f:facet name="footer" >
+		            <h4><b><i>Yearly Total Income: #{monthlyIncomeBean.yearlyTotal}</i></b></h4>
+		        </f:facet>
+        	        
+	        </p:dataTable>					
+				
+			</h:form>
+			</ui:define>
+
+	</ui:composition>
+</html>

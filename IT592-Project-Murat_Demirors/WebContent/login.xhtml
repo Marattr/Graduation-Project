@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+		<ui:define name="pageTitle">Login</ui:define>
+		
+			<ui:define name="maincontent">
+			
+					<div class="border_div3">
+					
+						<h:form>
+					    <center>
+						<h3>User Login</h3>
+
+						<h:panelGrid columns="3">
+						
+							<p:outputLabel value="Username" />
+							<p:inputText value="#{loginBean.username}" id="user" placeholder="Username" required="true" requiredMessage="Username is missing!"/>
+							<p:message for="user" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:outputLabel value="Password" />
+							<p:password value="#{loginBean.password}" id="pass" placeholder="Password" required="true" requiredMessage="Password is missing!"/>
+							<p:message for="pass" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+						
+							<p:outputLabel value=" " />
+							<p:commandButton action="#{loginBean.login()}" value="Login" binding="#{loginBean.loginbutton}" id="loginbutton"/>
+							<p:outputLabel value=" " />										
+							
+						</h:panelGrid>	
+						
+						
+					</center>
+					<p:messages for="loginbutton" showDetail="true" closable="true">
+				        <p:autoUpdate />
+				    </p:messages>					    
+	
+					</h:form>
+				</div>
+			</ui:define>
+
+	</ui:composition>
+</html>

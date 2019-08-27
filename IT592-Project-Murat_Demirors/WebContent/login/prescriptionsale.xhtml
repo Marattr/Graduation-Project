@@ -1,0 +1,479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+		<ui:define name="pageTitle">Prescription Sale</ui:define>
+		
+			<ui:define name="maincontent">
+			
+			
+			<h:form id="form">
+			<p:growl id="msg" showDetail="false"/>
+			<p:messages for="mybutton" showDetail="true" closable="true">
+		        <p:autoUpdate />
+		    </p:messages>	
+			<div class="row">
+			
+				<div class="col-3 col-s-4" >
+					<div class="border_div2">	
+					<h4>Customer Information</h4>
+					<h:panelGrid columns="2" cellpadding="5">
+																				
+				        <p:inputText value="#{prescriptionSaleBean.customer.name}" id="name" placeholder="Name" size="12"
+				        required="true" requiredMessage="Customer name is missing!"/>
+				        <p:message for="name" closable="true">
+								<p:autoUpdate />
+						</p:message>
+				       
+				        <p:inputText value="#{prescriptionSaleBean.customer.lastname}" id="lname" placeholder="Lastname" size="12"
+				        required="true" requiredMessage="Customer lastname is missing"/>
+				        <p:message for="lname" closable="true">
+								<p:autoUpdate />
+						</p:message>
+				       
+					    <p:inputMask value="#{prescriptionSaleBean.customer.phonenumber}" id="phone" mask="(999) 999-99-99" placeholder="Phone" size="12"
+					    required="true" requiredMessage="Customer phone is missing!"/>
+					    <p:message for="phone" closable="true">
+								<p:autoUpdate />
+						</p:message>
+					   
+					    <p:inputText value="#{prescriptionSaleBean.customer.tc_id_number}" id="tc" placeholder="TC ID" size="12" 
+					    required="true" requiredMessage="Customer TC ID is missing!"/>
+					    <p:message for="tc" closable="true">
+								<p:autoUpdate />
+						</p:message>
+						
+						<h4>Customer Address</h4>
+						<p:outputLabel value=" " />															
+						
+						<p:inputText value="#{prescriptionSaleBean.address.country}" placeholder="Country" id="country" required="true" 
+						requiredMessage="Please enter customer country"/>
+						<p:message for="country" closable="true">
+							<p:autoUpdate />
+					    </p:message>
+						
+						<p:inputText value="#{prescriptionSaleBean.address.city}" placeholder="City" id="city" required="true" 
+						requiredMessage="Please enter customer city"/>
+						<p:message for="city" closable="true">
+							<p:autoUpdate />
+					    </p:message>
+					    
+					    <p:inputText value="#{prescriptionSaleBean.address.district}" placeholder="District" id="district" required="true" 
+					    requiredMessage="Please enter customer district"/>
+						<p:message for="district" closable="true">
+							<p:autoUpdate />
+					    </p:message>
+					    
+					    <p:inputText value="#{prescriptionSaleBean.address.street}" placeholder="Street" id="street" required="true" 
+					    requiredMessage="Please enter customer street"/>
+						<p:message for="street" closable="true">
+							<p:autoUpdate />
+					    </p:message>
+					    					    
+					    <p:inputText value="#{prescriptionSaleBean.address.postcode}" placeholder="Postcode" id="postcode" required="true" 
+					    requiredMessage="Please enter customer postcode"/>
+						<p:message for="postcode" closable="true">
+							<p:autoUpdate />
+					    </p:message>
+					</h:panelGrid> 
+					</div>	
+					<hr class="custom_hr"/>
+					<div class="border_div2">
+					
+						<h4>Prescription Information</h4>
+						<h:panelGrid columns="2" cellpadding="5">
+							<p:inputText value="#{prescriptionSaleBean.order.doctorCode}" id="code" placeholder="Dr.Certificate No" size="12"
+							required="true" requiredMessage="Doctor Certificate No is missing!"/>
+							<p:message for="code" closable="true">
+								<p:autoUpdate />
+							</p:message>
+							
+							<p:inputText value="#{prescriptionSaleBean.order.doctorName}" id="dname" size="12" placeholder="Dr.Name"
+							required="true" requiredMessage="Doctor name is missing!"/>		
+							<p:message for="dname" closable="true">
+								<p:autoUpdate />
+							</p:message>				
+							
+							<p:calendar value="#{prescriptionSaleBean.order.date}" id="pdate" size="12" placeholder="Prescription Date"
+							required="true" requiredMessage="Prescription date is missing!"/>
+							<p:message for="pdate" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:inputText value="#{prescriptionSaleBean.order.hospital}" id="hos" size="12" placeholder="Hospital"
+							required="true" requiredMessage="Hospital name is missing!"/>	
+							<p:message for="hos" closable="true">
+								<p:autoUpdate />
+							</p:message>				
+						</h:panelGrid>
+					
+					</div>
+					<hr class="custom_hr"/>
+					<div class="border_div2">
+						
+						<h:panelGrid columns="3" cellpadding="5">
+							
+							<p:outputLabel value="Total Bill "/>													
+							<p:inputText value="#{prescriptionSaleBean.totalBill}" id="bill"  size="12" placeholder="0,00"
+							required="true" requiredMessage="Total bill is missing!"/>
+							<p:message for="bill" closable="true">
+								<p:autoUpdate />
+							</p:message>
+							
+							<p:outputLabel value="Payment Type "/>
+							<p:selectOneMenu value="#{prescriptionSaleBean.order.paymentType}" style="width:170px">
+						            <f:selectItem itemLabel="Credit Card" itemValue="Credit Card" />
+						            <f:selectItem itemLabel="Cash" itemValue="Cash" />					           
+	                        </p:selectOneMenu>
+	                        <p:outputLabel value=""/>
+	                        
+							<p:outputLabel value="Order Date "/>
+							<p:calendar value="#{prescriptionSaleBean.order.orderdate}" id="date" size="12" placeholder="Order Date"
+							required="true" requiredMessage="Order date is missing!"/>	
+							<p:message for="date" closable="true">
+								<p:autoUpdate />
+							</p:message>														
+							
+							<p:outputLabel value=""/>																
+							<p:commandButton value="Save" id="mybutton" binding="#{prescriptionSaleBean.mybutton}" action="#{prescriptionSaleBean.save()}" 
+							ajax="false"/>
+							<p:outputLabel value=""/>	
+							
+						</h:panelGrid>				
+					</div>
+				</div>
+			
+				<div class="col-9 col-s-8">
+					<p:outputLabel value="EyeGlasses" />	
+					<p:outputLabel value=" " />		
+					<p:outputLabel value=" " />						                        
+                    <p:selectBooleanCheckbox value="#{prescriptionSaleBean.eyeglasses_available}">
+                       	<p:ajax event="change" listener="#{prescriptionSaleBean.changePage()}" update="noname" />
+   					</p:selectBooleanCheckbox>                                           
+                      
+                    <h:panelGroup id="noname" >					
+					<h:panelGroup rendered="#{prescriptionSaleBean.eyeglasses_available}">
+					<div class="row">
+							
+						
+                            <div class="col-6 col-s-12 border_div">
+                            <h:panelGrid columns="5" cellpadding="5"  >
+                            	
+                            	<p:outputLabel value="RIGHT" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	
+                            	<p:selectOneMenu value="#{prescriptionSaleBean.right_eye.type}" style="width:125px">
+						            <f:selectItem itemLabel="Mineral" itemValue="Mineral" />
+						            <f:selectItem itemLabel="Organik" itemValue="Organik" />					           
+	                            </p:selectOneMenu>	                         
+	                            <p:selectOneMenu value="#{prescriptionSaleBean.right_eye.color}" style="width:125px">
+						            <f:selectItem itemLabel="White" itemValue="White" />
+						            <f:selectItem itemLabel="Colormatic" itemValue="Colormatic" />					           
+	                            </p:selectOneMenu>
+	                            <p:outputLabel value="Antirefle" />
+	                            <p:selectBooleanCheckbox value="#{prescriptionSaleBean.right_eye.antirefle}"/>
+	                            <p:outputLabel value="" />
+	                                                       	                       	                     
+						     
+						    </h:panelGrid>
+						    
+						    <h:panelGrid columns="5" cellpadding="5">
+						    	<p:outputLabel value="" />                      
+	                            <p:outputLabel value="Sphere" />
+	                            <p:outputLabel value="" />
+	                            <p:outputLabel value="CYL" />
+	                            <p:outputLabel value="Axis" />                                                  
+	                            
+	                            <p:selectOneMenu value="#{prescriptionSaleBean.right_eye.number_sferik_konkav}" style="width:60px">				            
+						            <f:selectItem itemLabel="+" itemValue="#{true}" />
+						            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+	                            </p:selectOneMenu>
+       							<p:inputNumber value="#{prescriptionSaleBean.right_eye.number}" decimalPlaces="2" decimalSeparator="." maxValue="20" minValue="0"
+       							        thousandSeparator="" size="3"/>
+       							<p:selectOneMenu value="#{prescriptionSaleBean.right_eye.number_cyl_sferik_konkav}" style="width:60px">				            
+						            <f:selectItem itemLabel="+" itemValue="#{true}" />
+						            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+	                            </p:selectOneMenu>
+       							<p:inputNumber value="#{prescriptionSaleBean.right_eye.number_cyl}" decimalPlaces="2" decimalSeparator="." maxValue="20" 
+       							        minValue="0" thousandSeparator="" size="3"/>
+       							<p:inputNumber value="#{prescriptionSaleBean.right_eye.aks}" decimalSeparator="." thousandSeparator="" size="1"
+       							    maxValue="180" minValue="0"/>      							     						
+       							
+						    </h:panelGrid>
+						    
+						    <h:panelGrid columns="5" cellpadding="5">
+						    	<p:inputText value="#{prescriptionSaleBean.right_eye.barcode_number}" size="11" placeholder="Barcode"
+						    	required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+       							<p:inputText value="#{prescriptionSaleBean.right_eye.brand}" size="11" placeholder="Brand"
+       							required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+       							<p:outputLabel value="Remove from storage" />
+       							<p:selectBooleanCheckbox value="#{prescriptionSaleBean.right_eye_storage}"/>   							
+       							<p:outputLabel value="" />
+      				
+						    </h:panelGrid>
+                            
+                            </div>
+                            
+                            <div class="col-6 col-s-12 border_div">
+                            <h:panelGrid columns="5" cellpadding="5">
+                            	
+                            	<p:outputLabel value="LEFT" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	
+                            	<p:selectOneMenu value="#{prescriptionSaleBean.left_eye.type}" style="width:125px">
+						            <f:selectItem itemLabel="Mineral" itemValue="Mineral" />
+						            <f:selectItem itemLabel="Organik" itemValue="Organik" />					           
+	                            </p:selectOneMenu>	                         
+	                            <p:selectOneMenu value="#{prescriptionSaleBean.left_eye.color}" style="width:125px">
+						            <f:selectItem itemLabel="White" itemValue="White" />
+						            <f:selectItem itemLabel="Colormatic" itemValue="Colormatic" />					           
+	                            </p:selectOneMenu>
+	                            <p:outputLabel value="Antirefle" />
+	                            <p:selectBooleanCheckbox value="#{prescriptionSaleBean.left_eye.antirefle}"/>
+	                            <p:outputLabel value="" />
+	                                                       	                       	                     
+						     
+						    </h:panelGrid>
+						    
+						    <h:panelGrid columns="5" cellpadding="5">
+						    	       <p:outputLabel value="" />                      
+	                            <p:outputLabel value="Sphere" />
+	                            <p:outputLabel value="" />
+	                            <p:outputLabel value="CYL" />
+	                            <p:outputLabel value="Axis" />                                                  
+	                            
+	                            <p:selectOneMenu value="#{prescriptionSaleBean.left_eye.number_sferik_konkav}" style="width:60px">				            
+						            <f:selectItem itemLabel="+" itemValue="#{true}" />
+						            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+	                            </p:selectOneMenu>
+       							<p:inputNumber value="#{prescriptionSaleBean.left_eye.number}" decimalPlaces="2" decimalSeparator="." maxValue="20" thousandSeparator="" 
+       							 minValue="0" size="3"/>
+       							<p:selectOneMenu value="#{prescriptionSaleBean.left_eye.number_cyl_sferik_konkav}" style="width:60px">				            
+						            <f:selectItem itemLabel="+" itemValue="#{true}" />
+						            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+	                            </p:selectOneMenu>
+       							<p:inputNumber value="#{prescriptionSaleBean.left_eye.number_cyl}" decimalPlaces="2" decimalSeparator="." maxValue="20" minValue="0" 
+       							  thousandSeparator=""  size="3"/>
+       							<p:inputNumber value="#{prescriptionSaleBean.left_eye.aks}" decimalSeparator="." minValue="0" maxValue="180" 
+       							thousandSeparator=""  size="1"/>      							     						
+       							
+						    </h:panelGrid>
+						    
+						    <h:panelGrid columns="5" cellpadding="5">
+						    	<p:inputText value="#{prescriptionSaleBean.left_eye.barcode_number}" size="11" placeholder="Barcode"
+						    	required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+       							<p:inputText value="#{prescriptionSaleBean.left_eye.brand}" size="11" placeholder="Brand"
+       							required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+       							<p:outputLabel value="Remove from storage" />
+       							<p:selectBooleanCheckbox value="#{prescriptionSaleBean.left_eye_storage}"/> 
+       							<p:outputLabel value="" />
+      				
+						    </h:panelGrid>
+                            
+                            </div>
+                            <div class="col-12 col-s-12 border_div" >
+                            <h:panelGrid columns="4" cellpadding="5">
+                           		<h4>Eyeglass frame specifications</h4>
+                           		<p:outputLabel value=" " />
+                           		<p:outputLabel value=" " />
+                           		<p:outputLabel value=" " />
+                           		
+                           		<p:inputText value="#{prescriptionSaleBean.eyeglasses.barcode_number}" size="11" placeholder="Barcode"
+                           		required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+	                            <p:inputText value="#{prescriptionSaleBean.eyeglasses.brand}" size="11" placeholder="Frame Brand"
+	                            required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>      	                            
+	                            <p:inputText value="#{prescriptionSaleBean.eyeglasses.eyeglasses_modelcode}" size="11" placeholder="Model Code"
+	                            required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+	                            <p:inputText value="#{prescriptionSaleBean.eyeglasses.eyeglasses_colorcode}" size="11" placeholder="Color Code"
+	                            required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/> 
+	                            
+	                            <p:outputLabel value="Remove from storage" />
+       							<p:selectBooleanCheckbox value="#{prescriptionSaleBean.eyeglasses_storage}"/> 
+       							<p:outputLabel value=" " />
+       							<p:outputLabel value=" " /> 
+	                        </h:panelGrid>  
+	                        </div> 
+	                                     
+					</div>
+					</h:panelGroup>
+					</h:panelGroup>
+					<hr class="custom_hr"/>
+					<p:outputLabel value="Reading Glasses" />	
+						<p:outputLabel value=" " />		
+						<p:outputLabel value=" " />
+						<p:selectBooleanCheckbox value="#{prescriptionSaleBean.reading_glasses_available}"> 
+	                       	<p:ajax event="change" listener="#{prescriptionSaleBean.changePage()}" update="noname2" />
+	   					</p:selectBooleanCheckbox>                                           
+	                      
+	                <h:panelGroup id="noname2" >
+	                <h:panelGroup rendered="#{prescriptionSaleBean.reading_glasses_available}">	
+					<div class="row">
+						
+						
+						 <div class="col-6 col-s-12 border_div">
+                            <h:panelGrid columns="5" cellpadding="5" >
+                            	
+                            	<p:outputLabel value="RIGHT" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	
+                            	<p:selectOneMenu value="#{prescriptionSaleBean.right_eye_reading.type}" style="width:125px">
+						            <f:selectItem itemLabel="Mineral" itemValue="Mineral" />
+						            <f:selectItem itemLabel="Organik" itemValue="Organik" />					           
+	                            </p:selectOneMenu>	                         
+	                            <p:selectOneMenu value="#{prescriptionSaleBean.right_eye_reading.color}" style="width:125px">
+						            <f:selectItem itemLabel="White" itemValue="White" />
+						            <f:selectItem itemLabel="Colormatic" itemValue="Colormatic" />					           
+	                            </p:selectOneMenu>
+	                            <p:outputLabel value="Antirefle" />
+	                            <p:selectBooleanCheckbox value="#{prescriptionSaleBean.right_eye_reading.antirefle}"/>
+	                            <p:outputLabel value="" />
+	                                                       	                       	                     
+						     
+						    </h:panelGrid>
+						    
+						    <h:panelGrid columns="5" cellpadding="5" rendered="#{prescriptionSaleBean.reading_glasses_available}">
+						    	       <p:outputLabel value="" />                      
+	                            <p:outputLabel value="Sphere" />
+	                            <p:outputLabel value="" />
+	                            <p:outputLabel value="CYL" />
+	                            <p:outputLabel value="Axis" />                                                  
+	                            
+	                            <p:selectOneMenu value="#{prescriptionSaleBean.right_eye_reading.number_sferik_konkav}" style="width:60px">				            
+						            <f:selectItem itemLabel="+" itemValue="#{true}" />
+						            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+	                            </p:selectOneMenu>
+       							<p:inputNumber value="#{prescriptionSaleBean.right_eye_reading.number}" decimalPlaces="2" minValue="0" maxValue="20" decimalSeparator="." 
+       							thousandSeparator=""  size="3"/>
+       							<p:selectOneMenu value="#{prescriptionSaleBean.right_eye_reading.number_cyl_sferik_konkav}" style="width:60px">				            
+						            <f:selectItem itemLabel="+" itemValue="#{true}" />
+						            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+	                            </p:selectOneMenu>
+       							<p:inputNumber value="#{prescriptionSaleBean.right_eye_reading.number_cyl}" decimalPlaces="2" minValue="0" maxValue="20" decimalSeparator="." 
+       							thousandSeparator=""  size="3"/>
+       							<p:inputNumber value="#{prescriptionSaleBean.right_eye_reading.aks}" decimalSeparator="." minValue="0" maxValue="180" 
+       							thousandSeparator=""  size="1"/>      							     						
+       							
+						    </h:panelGrid>
+						    
+						    <h:panelGrid columns="5" cellpadding="5" rendered="#{prescriptionSaleBean.reading_glasses_available}">
+						    	<p:inputText value="#{prescriptionSaleBean.right_eye_reading.barcode_number}" size="11" placeholder="Barcode"
+						    	required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+       							<p:inputText value="#{prescriptionSaleBean.right_eye_reading.brand}" size="11" placeholder="Brand"
+       							required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+       							<p:outputLabel value="Remove from storage" />
+       							<p:selectBooleanCheckbox value="#{prescriptionSaleBean.right_eye_reading_storage}"/> 
+       							<p:outputLabel value="" />
+      				
+						    </h:panelGrid>
+                            
+                            </div>
+                            
+                            <div class="col-6 col-s-12 border_div">
+                            <h:panelGrid columns="5" cellpadding="5" rendered="#{prescriptionSaleBean.reading_glasses_available}">
+                            	
+                            	<p:outputLabel value="LEFT" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	<p:outputLabel value="" />
+                            	
+                            	<p:selectOneMenu value="#{prescriptionSaleBean.left_eye_reading.type}" style="width:125px">
+						            <f:selectItem itemLabel="Mineral" itemValue="Mineral" />
+						            <f:selectItem itemLabel="Organik" itemValue="Organik" />					           
+	                            </p:selectOneMenu>	                         
+	                            <p:selectOneMenu value="#{prescriptionSaleBean.left_eye_reading.color}" style="width:125px">
+						            <f:selectItem itemLabel="White" itemValue="White" />
+						            <f:selectItem itemLabel="Colormatic" itemValue="Colormatic" />					           
+	                            </p:selectOneMenu>
+	                            <p:outputLabel value="Antirefle" />
+	                            <p:selectBooleanCheckbox value="#{prescriptionSaleBean.left_eye_reading.antirefle}"/>
+	                            <p:outputLabel value="" />
+	                                                       	                       	                     
+						     
+						    </h:panelGrid>
+						    
+						    <h:panelGrid columns="5" cellpadding="5" rendered="#{prescriptionSaleBean.reading_glasses_available}">
+						    	       <p:outputLabel value="" />                      
+	                            <p:outputLabel value="Sphere" />
+	                            <p:outputLabel value="" />
+	                            <p:outputLabel value="CYL" />
+	                            <p:outputLabel value="Axis" />                                                  
+	                            
+	                            <p:selectOneMenu value="#{prescriptionSaleBean.left_eye_reading.number_sferik_konkav}" style="width:60px">				            
+						            <f:selectItem itemLabel="+" itemValue="#{true}" />
+						            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+	                            </p:selectOneMenu>
+       							<p:inputNumber value="#{prescriptionSaleBean.left_eye_reading.number}" decimalPlaces="2" decimalSeparator="." thousandSeparator=""  size="3"
+       							minValue="0" maxValue="20"/>
+       							<p:selectOneMenu value="#{prescriptionSaleBean.left_eye_reading.number_cyl_sferik_konkav}" style="width:60px">				            
+						            <f:selectItem itemLabel="+" itemValue="#{true}" />
+						            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+	                            </p:selectOneMenu>
+       							<p:inputNumber value="#{prescriptionSaleBean.left_eye_reading.number_cyl}" minValue="0" maxValue="20" decimalPlaces="2"
+       							decimalSeparator="." thousandSeparator=""  size="3"/>
+       							<p:inputNumber value="#{prescriptionSaleBean.left_eye_reading.aks}" decimalSeparator="." thousandSeparator=""  
+       							minValue="0" maxValue="180" size="1"/>      							     						
+       							
+						    </h:panelGrid>
+						    
+						    <h:panelGrid columns="5" cellpadding="5" rendered="#{prescriptionSaleBean.reading_glasses_available}">
+						    	<p:inputText value="#{prescriptionSaleBean.left_eye_reading.barcode_number}" size="11" placeholder="Barcode"
+						    	required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+       							<p:inputText value="#{prescriptionSaleBean.left_eye_reading.brand}" size="11" placeholder="Brand"
+       							required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+       							<p:outputLabel value="Remove from storage" />
+       							<p:selectBooleanCheckbox value="#{prescriptionSaleBean.left_eye_reading_storage}"/> 
+       							<p:outputLabel value="" />
+      				
+						    </h:panelGrid>
+                            
+                            </div>
+                            <div class="col-12 col-s-12 border_div">
+                            <h:panelGrid columns="4" cellpadding="5" rendered="#{prescriptionSaleBean.reading_glasses_available}">
+                                <h4>Reading Glasses frame specifications</h4>
+                                <p:outputLabel value=" " /> 
+                                <p:outputLabel value=" " /> 
+                                <p:outputLabel value=" " /> 
+                                
+	                            <p:inputText value="#{prescriptionSaleBean.eyeglasses_reading.barcode_number}" size="11" placeholder="Barcode"
+	                            required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+	                            <p:inputText value="#{prescriptionSaleBean.eyeglasses_reading.brand}" size="11" placeholder="Frame Brand"
+	                            required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>      	                            
+	                            <p:inputText value="#{prescriptionSaleBean.eyeglasses_reading.eyeglasses_modelcode}" size="11" placeholder="Model Code"
+	                            required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+	                            <p:inputText value="#{prescriptionSaleBean.eyeglasses_reading.eyeglasses_colorcode}" size="11" placeholder="Color Code"
+	                            required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/> 
+	                            
+	                            <p:outputLabel value="Remove from storage" />
+       							<p:selectBooleanCheckbox value="#{prescriptionSaleBean.eyeglasses_reading_storage}"/> 
+       							<p:outputLabel value=" " /> 
+       							<p:outputLabel value=" " /> 
+							</h:panelGrid>
+							</div>
+					</div>
+					</h:panelGroup>
+					</h:panelGroup>	  
+				</div>
+			
+			</div>
+									
+				
+			</h:form>	
+			</ui:define>
+
+	</ui:composition>
+</html>

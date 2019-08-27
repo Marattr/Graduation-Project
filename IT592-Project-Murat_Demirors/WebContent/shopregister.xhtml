@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+			<ui:define name="pageTitle">ShopRegister</ui:define>
+		
+			<ui:define name="maincontent">
+				<div class="border_div3">
+				<h:form>
+				
+				<center>
+							<h3>Shop Registration</h3>
+							<h:panelGrid columns="3">
+							
+							<p:outputLabel value="Shop Name" />
+							<p:inputText value="#{shopRegisterBean.shop.shop_name}" placeholder="Shop name" id="name" required="true" requiredMessage="*"/>
+							<p:message for="name" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:outputLabel value="Tax ID Number" />
+							<p:inputText value="#{shopRegisterBean.shop.tax_id_number}" placeholder="Tax ID Number" id="tax" required="true" requiredMessage="*"/>
+							<p:message for="tax" closable="true">
+								<p:autoUpdate />
+						    </p:message>												
+							
+							
+							<p:outputLabel value=" " />
+							<h3>Shop Address</h3>
+							<p:outputLabel value=" " />
+																					
+							
+							<p:outputLabel value="Country" />
+							<p:inputText value="#{shopRegisterBean.address.country}" placeholder="Country" id="country" required="true" requiredMessage="*"/>
+							<p:message for="country" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+							
+							<p:outputLabel value="City" />
+							<p:inputText value="#{shopRegisterBean.address.city}" placeholder="City" id="city" required="true" requiredMessage="*"/>
+							<p:message for="city" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+						    
+						    <p:outputLabel value="District" />
+						    <p:inputText value="#{shopRegisterBean.address.district}" placeholder="District" id="district" required="true" requiredMessage="*"/>
+							<p:message for="district" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+						    
+						    <p:outputLabel value="Street" />
+						    <p:inputText value="#{shopRegisterBean.address.street}" placeholder="Street" id="street" required="true" requiredMessage="*"/>
+							<p:message for="street" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+						    
+						    <p:outputLabel value="Postcode" />
+						    <p:inputText value="#{shopRegisterBean.address.postcode}" placeholder="Postcode" id="postcode" required="true" requiredMessage="*"/>
+							<p:message for="postcode" closable="true">
+								<p:autoUpdate />
+						    </p:message>
+										
+							<p:outputLabel value=" " />
+							<p:commandButton action="#{shopRegisterBean.register()}" id="regbutton" value="Register" binding="#{shopRegisterBean.regbutton}"/>
+							<p:outputLabel value=" " />
+
+							
+						</h:panelGrid>
+			
+				
+			    </center>
+			    	<p:message for="regbutton" showDetail="true" closable="true">
+				        <p:autoUpdate />
+				    </p:message>	
+			</h:form>
+			</div>	    
+			</ui:define>	
+	
+	</ui:composition>
+</html>

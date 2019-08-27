@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+		<ui:define name="pageTitle">Add Product</ui:define>
+		
+			<ui:define name="maincontent">
+				<h:form>
+				<p:growl showDetail="true"/>
+				
+				<center>
+					<h3>Add product to storage </h3>
+
+					<p:accordionPanel id="accopanel">
+				        <p:tab title="Glass">	
+			        			<div class="border_div">
+								<h:panelGrid columns="5" cellpadding="5" >
+									                      	
+			                    	<p:selectOneMenu value="#{addProductBean.glass.type}" style="width:125px" >
+							            <f:selectItem itemLabel="Mineral" itemValue="Mineral" />
+							            <f:selectItem itemLabel="Organik" itemValue="Organik" />					           
+					                 </p:selectOneMenu>	                         
+			                         <p:selectOneMenu value="#{addProductBean.glass.color}" style="width:125px" >
+							            <f:selectItem itemLabel="White" itemValue="White" />
+							            <f:selectItem itemLabel="Colormatic" itemValue="Colormatic" />					           
+			                         </p:selectOneMenu>
+			                         <p:outputLabel value="Antirefle" />
+			                         <p:selectBooleanCheckbox value="#{addProductBean.glass.antirefle}"/>
+			                         <p:outputLabel value="" />
+								</h:panelGrid>
+								
+								<h:panelGrid columns="5" cellpadding="5" >
+								    	<p:outputLabel value="" />                      
+			                            <p:outputLabel value="Sphere" />
+			                            <p:outputLabel value="" />
+			                            <p:outputLabel value="CYL" />
+			                            <p:outputLabel value="" />                                                  
+			                            
+			                            <p:selectOneMenu value="#{addProductBean.glass.number_sferik_konkav}" style="width:60px">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </p:selectOneMenu>
+			      							<p:inputNumber value="#{addProductBean.glass.number}" decimalPlaces="2" decimalSeparator="." maxValue="20" 
+			      							minValue="0" thousandSeparator="" size="3" />
+			      						<p:selectOneMenu value="#{addProductBean.glass.number_cyl_sferik_konkav}" style="width:60px">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </p:selectOneMenu>
+			    						<p:inputNumber value="#{addProductBean.glass.number_cyl}" decimalPlaces="2" decimalSeparator="." maxValue="20" 
+			    							        minValue="0" thousandSeparator="" size="3" />
+			    					     <p:outputLabel value="" />      							     						
+			       							
+								</h:panelGrid>
+								
+								<h:panelGrid columns="5" cellpadding="5" >
+							    	<p:inputText value="#{addProductBean.glass.barcode_number}" size="11" placeholder="Barcode" />
+									<p:inputText value="#{addProductBean.glass.brand}" size="11" placeholder="Brand" />
+									
+									
+									<p:outputLabel value="" />
+									<p:outputLabel value="" />
+									<p:outputLabel value="" />		
+									<p:outputLabel value="" />				
+									<p:commandButton action="#{addProductBean.saveGlass()}" value="Save" ajax="false"/>					    
+			      				
+							    </h:panelGrid>
+							    </div>
+				        </p:tab>
+				        
+				        <p:tab title="Lens">
+				        	<div class="border_div2">
+							<h:panelGrid columns="5" cellpadding="5" >
+								 <p:outputLabel value="" />                      
+		                            <p:outputLabel value="Sphere" />
+		                            <p:outputLabel value="" />
+		                            <p:outputLabel value="CYL" />
+		                            <p:outputLabel value="" />                                                  
+		                            
+		                            <p:selectOneMenu value="#{addProductBean.lens.number_sferik_konkav}" style="width:60px">				            
+							            <f:selectItem itemLabel="+" itemValue="#{true}" />
+							            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+		                            </p:selectOneMenu>
+		      							<p:inputNumber value="#{addProductBean.lens.number}" decimalPlaces="2" decimalSeparator="." maxValue="20" minValue="0"
+		      							        thousandSeparator="" size="3" />
+		      						<p:selectOneMenu value="#{addProductBean.lens.number_cyl_sferik_konkav}" style="width:60px">				            
+							            <f:selectItem itemLabel="+" itemValue="#{true}" />
+							            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+		                            </p:selectOneMenu>
+		    						<p:inputNumber value="#{addProductBean.lens.number_cyl}" decimalPlaces="2" decimalSeparator="." maxValue="20" 
+		    							        minValue="0" thousandSeparator="" size="3"/>
+		    					     <p:outputLabel value="" />                  	
+		                    	
+							</h:panelGrid>
+							
+							<h:panelGrid columns="5" cellpadding="5" >
+						    	<p:inputText value="#{addProductBean.lens.barcode_number}" size="11" placeholder="Barcode"/>
+								<p:inputText value="#{addProductBean.lens.brand}" size="11" placeholder="Brand"/>
+								
+								
+								<p:outputLabel value="" />
+								<p:outputLabel value="" />
+								<p:outputLabel value="" />		
+								<p:outputLabel value="" />				
+								<p:commandButton action="#{addProductBean.saveLens()}" value="Save"  ajax="false"/>					    
+		      				
+						    </h:panelGrid>
+						    </div>
+				        </p:tab>
+				        <p:tab title="Eyeglasses">
+				        	<div class="border_div">
+							<h:panelGrid columns="4" cellpadding="5">
+								<p:inputText value="#{addProductBean.eyeglasses.eyeglasses_modelcode}" size="11" placeholder="Model Code"/>
+								<p:inputText value="#{addProductBean.eyeglasses.eyeglasses_colorcode}" size="11" placeholder="Color Code"/>
+								<p:outputLabel value="" />
+								<p:outputLabel value=""/>
+		    							        
+						    	<p:inputText value="#{addProductBean.eyeglasses.barcode_number}" size="11" placeholder="Barcode"/>
+								<p:inputText value="#{addProductBean.eyeglasses.brand}" size="11" placeholder="Brand"/>
+								
+								
+								
+								<p:outputLabel value="" />
+								<p:outputLabel value="" />		
+								<p:outputLabel value="" />				
+								<p:commandButton action="#{addProductBean.saveEyeglasses()}" value="Save"  ajax="false"/>					    
+		     				
+					        </h:panelGrid>
+					        </div>
+					        </p:tab>
+					        <p:tab title="Sunglasses">					
+
+							<div class="border_div2">
+							<h:panelGrid columns="4" cellpadding="5" >
+								<p:inputText value="#{addProductBean.sunglasses.sunglasses_modelcode}" size="11" placeholder="Model Code"/>
+								<p:inputText value="#{addProductBean.sunglasses.sunglasses_colorcode}" size="11" placeholder="Color Code"/>
+								<p:outputLabel value=""/>
+								<p:outputLabel value=""/>
+		    							        
+						    	<p:inputText value="#{addProductBean.sunglasses.barcode_number}" size="11" placeholder="Barcode"/>
+								<p:inputText value="#{addProductBean.sunglasses.brand}" size="11" placeholder="Brand"/>
+								
+														
+								<p:outputLabel value="" />
+								<p:outputLabel value="" />		
+								<p:outputLabel value="" />				
+								<p:commandButton action="#{addProductBean.saveSunGlasses()}" value="Save"  ajax="false"/>					    
+		     				
+					        </h:panelGrid>
+					        </div>
+				        
+				        </p:tab>
+				    </p:accordionPanel>											
+					
+			    </center>
+			    
+			    </h:form>
+
+			</ui:define>
+
+	</ui:composition>
+</html>

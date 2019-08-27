@@ -1,0 +1,379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+		<ui:define name="pageTitle">Sale Info</ui:define>
+		
+			<ui:define name="maincontent">
+			<h:form>
+			<center><h2>Sale Information </h2></center>
+			    	<p:dataTable var="sale" value="#{saleInfoBean.sale}" class="font_size">
+				        <p:column headerText="Hospital" rendered="#{'SunGlasses' != editSaleBean.sunglasses.productCategory.categoryName}">
+				            <h:outputText value="#{sale.hospital}" />
+				        </p:column>
+				        
+				        <p:column headerText="Doctor Name" rendered="#{'SunGlasses' != editSaleBean.sunglasses.productCategory.categoryName}">
+				            <h:outputText value="#{sale.doctorName}" />
+				        </p:column>
+				        
+				        <p:column headerText="Dr.Certificate No" rendered="#{'SunGlasses' != editSaleBean.sunglasses.productCategory.categoryName}">
+				            <h:outputText value="#{sale.doctorCode}" />
+				        </p:column>
+				        
+				        <p:column headerText="Prescription Date" rendered="#{'SunGlasses' != editSaleBean.sunglasses.productCategory.categoryName}">
+				            <h:outputText value="#{sale.date}" />
+				        </p:column>
+				        
+				        <p:column headerText="Sales Date">
+				            <h:outputText value="#{sale.orderdate}" />
+				        </p:column>
+				        
+				        <p:column headerText="Customer Name / Lastname">
+				            <h:outputText value="#{sale.customerOrder.name} #{sale.customerOrder.lastname}" />
+				        </p:column>
+				        
+				        <p:column headerText="Customer Phone">
+				            <h:outputText value="#{sale.customerOrder.phonenumber}" />
+				        </p:column>
+				        
+				        <p:column headerText="Customer TC ID">
+				            <h:outputText value="#{sale.customerOrder.tc_id_number}" />
+				        </p:column>
+				        
+				        <p:column headerText="Total Bill">
+				            <h:outputText value="#{sale.totalbill}" />
+				        </p:column>
+				        
+			        </p:dataTable>
+			        
+			        <hr class="custom_hr"/>
+					
+					<div class="row">
+					<h:panelGroup rendered="#{'EyeGlasses' == saleInfoBean.eyeglasses.productCategory.categoryName}">
+					<center>
+					
+					<h3>Eyeglasses</h3>
+						<p:dataTable var="eyeglasses" value="#{saleInfoBean.eyeglasses}" style="width:60%;" class="font_size" >
+						
+							<p:column headerText="Barcode">
+					            <h:outputText value="#{eyeglasses.barcode_number}" />
+					        </p:column>
+					        <p:column headerText="Brand">
+					        	<h:outputText value="#{eyeglasses.brand}" />				        	
+					        </p:column>
+					        
+					        <p:column headerText="Model Code">
+					        	<h:outputText value="#{eyeglasses.eyeglasses_modelcode}" />				        	
+					        </p:column>
+					        
+					        <p:column headerText="Color Code">
+					        	<h:outputText value="#{eyeglasses.eyeglasses_colorcode}" />				        	
+					        </p:column>					   					        
+					      
+				        </p:dataTable>
+				     </center>
+						<div class="col-6 col-s-12">
+						
+						<h4>Right Eye</h4>
+							<p:dataTable var="glass" value="#{saleInfoBean.right_eye}" class="font_size">
+					        <p:column headerText="Sphere">
+					        	<h:outputText value="+" rendered="#{glass.number_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!glass.number_sferik_konkav}" />
+					            <h:outputText value="#{glass.number}" />
+					        </p:column>
+					        
+					        <p:column headerText="CYL">
+					        	<h:outputText value="+" rendered="#{glass.number_cyl_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!glass.number_cyl_sferik_konkav}" />
+					            <h:outputText value="#{glass.number_cyl}" />
+					        </p:column>
+					        
+					        <p:column headerText="Axis">
+					            <h:outputText value="#{glass.aks}" />
+					        </p:column>
+					        
+					        <p:column headerText="Antirefle">
+					            <h:outputText value="Antirefle" rendered="#{glass.antirefle}" />
+					            <h:outputText value="None" rendered="#{!glass.antirefle}" />
+					        </p:column>
+					        
+					        <p:column headerText="Type">
+					            <h:outputText value="#{glass.type}" />
+					        </p:column>
+					        
+					        <p:column headerText="Color">
+					            <h:outputText value="#{glass.color}" />
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					            <h:outputText value="#{glass.brand}" />
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <h:outputText value="#{glass.barcode_number}" />
+					        </p:column>
+					      
+				        </p:dataTable>
+						</div>												
+						
+						<div class="col-6 col-s-12">
+						<h4>Left Eye</h4>
+							<p:dataTable var="glass" value="#{saleInfoBean.left_eye}" class="font_size">
+					        <p:column headerText="Sphere">
+					        	<h:outputText value="+" rendered="#{glass.number_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!glass.number_sferik_konkav}" />
+					            <h:outputText value="#{glass.number}" />
+					        </p:column>
+					        
+					        <p:column headerText="CYL">
+					        	<h:outputText value="+" rendered="#{glass.number_cyl_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!glass.number_cyl_sferik_konkav}" />
+					            <h:outputText value="#{glass.number_cyl}" />
+					        </p:column>
+					        
+					        <p:column headerText="Axis">
+					            <h:outputText value="#{glass.aks}" />
+					        </p:column>
+					        
+					        <p:column headerText="Antirefle">
+					            <h:outputText value="Antirefle" rendered="#{glass.antirefle}" />
+					            <h:outputText value="None" rendered="#{!glass.antirefle}" />
+					        </p:column>
+					        
+					        <p:column headerText="Type">
+					            <h:outputText value="#{glass.type}" />
+					        </p:column>
+					        
+					        <p:column headerText="Color">
+					            <h:outputText value="#{glass.color}" />
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					            <h:outputText value="#{glass.brand}" />
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <h:outputText value="#{glass.barcode_number}" />
+					        </p:column>
+					      
+				        </p:dataTable>
+				        
+						</div>										
+						
+						</h:panelGroup>
+						
+						<h:panelGroup rendered="#{'EyeGlasses' == saleInfoBean.eyeglasses_reading.productCategory.categoryName}">
+						
+						<hr class="custom_hr"/>
+						<center>
+						<h3>Reading Glasses</h3>
+						<p:dataTable var="eyeglasses" value="#{saleInfoBean.eyeglasses_reading}" style="width:60%;" class="font_size">
+						
+							<p:column headerText="Barcode">
+					        	<h:outputText value="#{eyeglasses.barcode_number}" />				        	
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					        	<h:outputText value="#{eyeglasses.brand}" />				        	
+					        </p:column>
+					        
+					        <p:column headerText="Model Code">
+					        	<h:outputText value="#{eyeglasses.eyeglasses_modelcode}" />				        	
+					        </p:column>
+					        
+					        <p:column headerText="Color Code">
+					        	<h:outputText value="#{eyeglasses.eyeglasses_colorcode}" />				        	
+					        </p:column>					   					        
+					      
+				        </p:dataTable>
+				        </center>
+				        
+						<div class="col-6 col-s-12">
+						
+						<h4>Right Eye</h4>
+							<p:dataTable var="glass" value="#{saleInfoBean.right_eye_reading}" class="font_size">
+					        <p:column headerText="Sphere">
+					        	<h:outputText value="+" rendered="#{glass.number_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!glass.number_sferik_konkav}" />
+					            <h:outputText value="#{glass.number}" />
+					        </p:column>
+					        
+					        <p:column headerText="CYL">
+					        	<h:outputText value="+" rendered="#{glass.number_cyl_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!glass.number_cyl_sferik_konkav}" />
+					            <h:outputText value="#{glass.number_cyl}" />
+					        </p:column>
+					        
+					        <p:column headerText="Axis">
+					            <h:outputText value="#{glass.aks}" />
+					        </p:column>
+					        
+					        <p:column headerText="Antirefle">
+					            <h:outputText value="Antirefle" rendered="#{glass.antirefle}" />
+					            <h:outputText value="None" rendered="#{!glass.antirefle}" />
+					        </p:column>
+					        
+					        <p:column headerText="Type">
+					            <h:outputText value="#{glass.type}" />
+					        </p:column>
+					        
+					        <p:column headerText="Color">
+					            <h:outputText value="#{glass.color}" />
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					            <h:outputText value="#{glass.brand}" />
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <h:outputText value="#{glass.barcode_number}" />
+					        </p:column>
+					      
+				        </p:dataTable>
+						</div>
+						<div class="col-6 col-s-12">
+						<h4>Left Eye</h4>
+							<p:dataTable var="glass" value="#{saleInfoBean.left_eye_reading}" class="font_size">
+					        <p:column headerText="Sphere">
+					        	<h:outputText value="+" rendered="#{glass.number_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!glass.number_sferik_konkav}" />
+					            <h:outputText value="#{glass.number}" />
+					        </p:column>
+					        
+					        <p:column headerText="CYL">
+					        	<h:outputText value="+" rendered="#{glass.number_cyl_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!glass.number_cyl_sferik_konkav}" />
+					            <h:outputText value="#{glass.number_cyl}" />
+					        </p:column>
+					        
+					        <p:column headerText="Axis">
+					            <h:outputText value="#{glass.aks}" />
+					        </p:column>
+					        
+					        <p:column headerText="Antirefle">
+					            <h:outputText value="Antirefle" rendered="#{glass.antirefle}" />
+					            <h:outputText value="None" rendered="#{!glass.antirefle}" />
+					        </p:column>
+					        
+					        <p:column headerText="Type">
+					            <h:outputText value="#{glass.type}" />
+					        </p:column>
+					        
+					        <p:column headerText="Color">
+					            <h:outputText value="#{glass.color}" />
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					            <h:outputText value="#{glass.brand}" />
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <h:outputText value="#{glass.barcode_number}" />
+					        </p:column>
+					      
+				        </p:dataTable>
+						</div>
+						</h:panelGroup>
+						
+						<h:panelGroup rendered="#{'Lens' == saleInfoBean.right_eye_lens.productCategory.categoryName}">
+						<center><h3>Lens</h3></center>
+						<div class="col-6 col-s-12">
+						
+						<h4>Right Eye</h4>
+							<p:dataTable var="lens" value="#{saleInfoBean.right_eye_lens}" class="font_size">
+					        <p:column headerText="Sphere">
+					        	<h:outputText value="+" rendered="#{lens.number_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!lens.number_sferik_konkav}" />
+					            <h:outputText value="#{lens.number}" />
+					        </p:column>
+					        
+					        <p:column headerText="CYL">
+					        	<h:outputText value="+" rendered="#{lens.number_cyl_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!lens.number_cyl_sferik_konkav}" />
+					            <h:outputText value="#{lens.number_cyl}" />
+					        </p:column>
+					        
+					        <p:column headerText="Axis">
+					            <h:outputText value="#{lens.aks}" />
+					        </p:column>					        					      
+					        
+					        <p:column headerText="Brand">
+					            <h:outputText value="#{lens.brand}" />
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <h:outputText value="#{lens.barcode_number}" />
+					        </p:column>
+					      
+				        </p:dataTable>
+						</div>
+						<div class="col-6 col-s-12">
+						<h4>Left Eye</h4>
+							<p:dataTable var="lens" value="#{saleInfoBean.left_eye_lens}" class="font_size">
+					        <p:column headerText="Sphere">
+					        	<h:outputText value="+" rendered="#{lens.number_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!lens.number_sferik_konkav}" />
+					            <h:outputText value="#{lens.number}" />
+					        </p:column>
+					        
+					        <p:column headerText="CYL">
+					        	<h:outputText value="+" rendered="#{lens.number_cyl_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!lens.number_cyl_sferik_konkav}" />
+					            <h:outputText value="#{lens.number_cyl}" />
+					        </p:column>
+					        
+					        <p:column headerText="Axis">
+					            <h:outputText value="#{lens.aks}" />
+					        </p:column>					        					       
+					        
+					        <p:column headerText="Brand">
+					            <h:outputText value="#{lens.brand}" />
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <h:outputText value="#{lens.barcode_number}" />
+					        </p:column>
+					      
+				        </p:dataTable>
+				        </div>
+				        </h:panelGroup>
+				        
+				        <h:panelGroup rendered="#{'SunGlasses' == saleInfoBean.sunglasses.productCategory.categoryName}">
+						<center><h3>SunGlasses</h3></center>
+						
+												
+							<p:dataTable var="sunglasses" value="#{saleInfoBean.sunglasses}" class="font_size">	
+							
+								<p:column headerText="Barcode">
+						            <h:outputText value="#{sunglasses.barcode_number}" />
+						        </p:column>				        					        				        					        						        				        					      
+						        
+						        <p:column headerText="Brand">
+						            <h:outputText value="#{sunglasses.brand}" />
+						        </p:column>
+						        
+						        <p:column headerText="Model">
+						            <h:outputText value="#{sunglasses.sunglasses_modelcode}" />
+						        </p:column>	
+						        
+						        <p:column headerText="Color Code">
+						            <h:outputText value="#{sunglasses.sunglasses_colorcode}" />
+						        </p:column>	
+					      
+				        	</p:dataTable>
+						
+						
+				        </h:panelGroup>
+					</div>								
+					
+			</h:form>
+			
+			</ui:define>
+
+	</ui:composition>
+</html>

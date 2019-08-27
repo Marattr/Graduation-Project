@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+		<ui:define name="pageTitle">Edit</ui:define>
+		
+			<ui:define name="maincontent">
+				<h:form id="form">
+				<p:growl id="msgs" showDetail="true"/>
+				
+				<center>
+					<h3>Edit Personnel / Shop </h3>
+				
+					<p:accordionPanel id="accopanel">
+				        <p:tab title="Personnel">	
+				        	<div class="border_div">						 
+							<p:dataTable id="personel" var="personel" value="#{editShopUserBean.personel}" editable="true" editMode="cell" widgetVar="cellPersonel">
+								<p:ajax event="cellEdit" listener="#{editShopUserBean.onCellEdit}" update=":form:msgs" />
+								<f:facet name="header">
+						            Personnel Information
+						        </f:facet>
+						        
+								<p:column headerText="Name">
+					               <p:cellEditor>
+					                   <f:facet name="output"><h:outputText value="#{personel.name}" /></f:facet>
+					                   <f:facet name="input"><p:inputText value="#{personel.name}"/></f:facet>
+					               </p:cellEditor>
+					           </p:column>
+					           
+					           <p:column headerText="Lastname">
+					               <p:cellEditor>
+					                   <f:facet name="output"><h:outputText value="#{personel.lastname}" /></f:facet>
+					                   <f:facet name="input"><p:inputText value="#{personel.lastname}"/></f:facet>
+					               </p:cellEditor>
+					           </p:column>
+					           
+					            <p:column headerText="Username">
+					               <p:cellEditor>
+					                   <f:facet name="output"><h:outputText value="#{personel.username}" /></f:facet>
+					                   <f:facet name="input"><p:inputText value="#{personel.username}"/></f:facet>
+					               </p:cellEditor>
+					           </p:column>
+					           
+					           <p:column headerText="TC ID Number">
+					               <p:cellEditor>
+					                   <f:facet name="output"><h:outputText value="#{personel.tc_id_number}" /></f:facet>
+					                   <f:facet name="input"><p:inputText value="#{personel.tc_id_number}"/></f:facet>
+					               </p:cellEditor>
+					           </p:column>
+					           
+					            <p:column headerText="Phone">
+					               <p:cellEditor>
+					                   <f:facet name="output"><h:outputText value="#{personel.phonenumber}" /></f:facet>
+					                   <f:facet name="input"><p:inputMask value="#{personel.phonenumber}" mask="(999) 999-99-99"/></f:facet>
+					               </p:cellEditor>
+					           </p:column>
+					           
+					           <p:column headerText="Email">
+					               <p:cellEditor>
+					                   <f:facet name="output"><h:outputText value="#{personel.email}" /></f:facet>
+					                   <f:facet name="input"><p:inputText value="#{personel.email}" /></f:facet>
+					               </p:cellEditor>
+					           </p:column>
+					           
+							</p:dataTable>
+							<p:contextMenu for="personel" widgetVar="cMenu">   
+						        <p:menuitem value="Edit Cell" onclick="PF('cellPersonel').showCellEditor();return false;"/>  
+						        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+						    </p:contextMenu> 
+											
+					    </div>
+				        </p:tab>
+				        
+				        <p:tab title="Personel Address">	
+				        	<div class="border_div2">
+							<p:dataTable id="personelAddress" var="address" value="#{editShopUserBean.personelAddress}" editable="true" editMode="cell" 
+										widgetVar="cellPersonelAddress">
+									<p:ajax event="cellEdit" listener="#{editShopUserBean.onCellEdit2}" update=":form:msgs" />
+									
+									<f:facet name="header">
+							            Personnel Address Information
+							        </f:facet>
+							        
+									<p:column headerText="Country">
+						               <p:cellEditor>
+						                   <f:facet name="output"><h:outputText value="#{address.country}" /></f:facet>
+						                   <f:facet name="input"><p:inputText value="#{address.country}"/></f:facet>
+						               </p:cellEditor>
+						           </p:column>
+						           
+						           <p:column headerText="City">
+						               <p:cellEditor>
+						                   <f:facet name="output"><h:outputText value="#{address.city}" /></f:facet>
+						                   <f:facet name="input"><p:inputText value="#{address.city}"/></f:facet>
+						               </p:cellEditor>
+						           </p:column>
+						           
+						            <p:column headerText="District">
+						               <p:cellEditor>
+						                   <f:facet name="output"><h:outputText value="#{address.district}" /></f:facet>
+						                   <f:facet name="input"><p:inputText value="#{address.district}"/></f:facet>
+						               </p:cellEditor>
+						           </p:column>
+						           
+						           <p:column headerText="Street">
+						               <p:cellEditor>
+						                   <f:facet name="output"><h:outputText value="#{address.street}" /></f:facet>
+						                   <f:facet name="input"><p:inputText value="#{address.street}"/></f:facet>
+						               </p:cellEditor>
+						           </p:column>
+						           
+						            <p:column headerText="Postcode">
+						               <p:cellEditor>
+						                   <f:facet name="output"><h:outputText value="#{address.postcode}" /></f:facet>
+						                   <f:facet name="input"><p:inputText value="#{address.postcode}"/></f:facet>
+						               </p:cellEditor>
+						           </p:column>				           				          
+						           
+								</p:dataTable>
+								<p:contextMenu for="personelAddress" widgetVar="cMenu">   
+							        <p:menuitem value="Edit Cell" onclick="PF('cellPersonelAddress').showCellEditor();return false;"/>  
+							        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+							    </p:contextMenu> 
+											
+						    </div>
+				        </p:tab>
+				        <p:tab title="Shop">
+				        	<div class="border_div">
+									<p:dataTable id="shop" var="shop" value="#{editShopUserBean.shop}" editable="true" editMode="cell" widgetVar="cellShop">
+									<p:ajax event="cellEdit" listener="#{editShopUserBean.onCellEdit3}" update=":form:msgs" />
+									<f:facet name="header">
+							            Shop Information
+							        </f:facet>
+							        
+									<p:column headerText="Shop Name">
+						               <p:cellEditor>
+						                   <f:facet name="output"><h:outputText value="#{shop.shop_name}" /></f:facet>
+						                   <f:facet name="input"><p:inputText value="#{shop.shop_name}"/></f:facet>
+						               </p:cellEditor>
+						           </p:column>
+						           
+						           <p:column headerText="Tax ID Number">
+						               <p:cellEditor>
+						                   <f:facet name="output"><h:outputText value="#{shop.tax_id_number}" /></f:facet>
+						                   <f:facet name="input"><p:inputText value="#{shop.tax_id_number}"/></f:facet>
+						               </p:cellEditor>
+						           </p:column>				           				           				           			           
+						           
+								</p:dataTable>
+								<p:contextMenu for="shop" widgetVar="cMenu">   
+							        <p:menuitem value="Edit Cell" onclick="PF('cellShop').showCellEditor();return false;"/>  
+							        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+							    </p:contextMenu> 
+					        </div>
+				        </p:tab>
+				        <p:tab title="Shop Address">
+				        	<div class="border_div2">
+								<p:dataTable id="shopAddress" var="address" value="#{editShopUserBean.shopAddress}" editable="true" editMode="cell" 
+									widgetVar="cellShopAddress">
+								<p:ajax event="cellEdit" listener="#{editShopUserBean.onCellEdit4}" update=":form:msgs" />
+								
+								<f:facet name="header">
+						            Shop Address Information
+						        </f:facet>
+						        
+								<p:column headerText="Country">
+					               <p:cellEditor>
+					                   <f:facet name="output"><h:outputText value="#{address.country}" /></f:facet>
+					                   <f:facet name="input"><p:inputText value="#{address.country}"/></f:facet>
+					               </p:cellEditor>
+					           </p:column>
+					           
+					           <p:column headerText="City">
+					               <p:cellEditor>
+					                   <f:facet name="output"><h:outputText value="#{address.city}" /></f:facet>
+					                   <f:facet name="input"><p:inputText value="#{address.city}"/></f:facet>
+					               </p:cellEditor>
+					           </p:column>
+					           
+					            <p:column headerText="District">
+					               <p:cellEditor>
+					                   <f:facet name="output"><h:outputText value="#{address.district}" /></f:facet>
+					                   <f:facet name="input"><p:inputText value="#{address.district}"/></f:facet>
+					               </p:cellEditor>
+					           </p:column>
+					           
+					           <p:column headerText="Street">
+					               <p:cellEditor>
+					                   <f:facet name="output"><h:outputText value="#{address.street}" /></f:facet>
+					                   <f:facet name="input"><p:inputText value="#{address.street}"/></f:facet>
+					               </p:cellEditor>
+					           </p:column>
+					           
+					            <p:column headerText="Postcode">
+					               <p:cellEditor>
+					                   <f:facet name="output"><h:outputText value="#{address.postcode}" /></f:facet>
+					                   <f:facet name="input"><p:inputText value="#{address.postcode}"/></f:facet>
+					               </p:cellEditor>
+					           </p:column>				           				          
+					           
+							</p:dataTable>
+							<p:contextMenu for="shopAddress" widgetVar="cMenu">   
+						        <p:menuitem value="Edit Cell" onclick="PF('cellShopAddress').showCellEditor();return false;"/>  
+						        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+						    </p:contextMenu>
+				        </div>
+				        </p:tab>
+				    </p:accordionPanel>					
+					
+			    </center>
+			    
+			    </h:form>
+
+			</ui:define>
+
+	</ui:composition>
+</html>

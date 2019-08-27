@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+		<ui:define name="pageTitle">SunGlasses Sale</ui:define>
+		
+			<ui:define name="maincontent">
+			
+			
+			<h:form id="form">
+			<p:growl id="msg" showDetail="false"/>
+			<p:messages for="mybutton" showDetail="true" closable="true">
+	        <p:autoUpdate />
+		    </p:messages>
+			<div class="row">
+			
+				<div class="col-3 col-s-4" >
+					<div class="border_div2">	
+					<h4>Customer Information</h4>
+					<h:panelGrid columns="2" cellpadding="5">
+																				
+				        <p:inputText value="#{sunGlassesSaleBean.customer.name}" id="name" placeholder="Name" size="12"
+				        required="true" requiredMessage="Customer name is missing!"/>
+				        <p:message for="name" closable="true">
+								<p:autoUpdate />
+						</p:message>
+				       
+				        <p:inputText value="#{sunGlassesSaleBean.customer.lastname}" id="lname" placeholder="Lastname" size="12"
+				        required="true" requiredMessage="Customer lastname is missing"/>
+				        <p:message for="lname" closable="true">
+								<p:autoUpdate />
+						</p:message>
+				       
+					    <p:inputMask value="#{sunGlassesSaleBean.customer.phonenumber}" id="phone" mask="(999) 999-99-99" placeholder="Phone" size="12"
+					    required="true" requiredMessage="Customer phone is missing!"/>
+					    <p:message for="phone" closable="true">
+								<p:autoUpdate />
+						</p:message>
+					   
+					    <p:inputText value="#{sunGlassesSaleBean.customer.tc_id_number}" id="tc" placeholder="TC ID" size="12" 
+					    required="true" requiredMessage="Customer TC ID is missing!"/>
+					    <p:message for="tc" closable="true">
+								<p:autoUpdate />
+						</p:message>
+						
+						<h3>Customer Address</h3>
+						<p:outputLabel value=" " />															
+						
+						<p:inputText value="#{sunGlassesSaleBean.address.country}" placeholder="Country" id="country" required="true" 
+						requiredMessage="Please enter customer country"/>
+						<p:message for="country" closable="true">
+							<p:autoUpdate />
+					    </p:message>
+						
+						<p:inputText value="#{sunGlassesSaleBean.address.city}" placeholder="City" id="city" required="true" 
+						requiredMessage="Please enter customer city"/>
+						<p:message for="city" closable="true">
+							<p:autoUpdate />
+					    </p:message>
+					    
+					    <p:inputText value="#{sunGlassesSaleBean.address.district}" placeholder="District" id="district" required="true" 
+					    requiredMessage="Please enter customer district"/>
+						<p:message for="district" closable="true">
+							<p:autoUpdate />
+					    </p:message>
+					    
+					    <p:inputText value="#{sunGlassesSaleBean.address.street}" placeholder="Street" id="street" required="true" 
+					    requiredMessage="Please enter customer street"/>
+						<p:message for="street" closable="true">
+							<p:autoUpdate />
+					    </p:message>
+					    					    
+					    <p:inputText value="#{sunGlassesSaleBean.address.postcode}" placeholder="Postcode" id="postcode" required="true" 
+					    requiredMessage="Please enter customer postcode"/>
+						<p:message for="postcode" closable="true">
+							<p:autoUpdate />
+					    </p:message>
+					</h:panelGrid> 
+					</div>	
+				
+					<hr class="custom_hr"/>
+					<div class="border_div2">
+						
+						<h:panelGrid columns="3" cellpadding="5">
+							
+							<p:outputLabel value="Total Bill "/>													
+							<p:inputText value="#{sunGlassesSaleBean.totalBill}" id="bill" size="12" placeholder="0,00"
+							required="true" requiredMessage="Total bill is missing!"/>
+							<p:message for="bill" closable="true">
+								<p:autoUpdate />
+							</p:message>
+							
+							<p:outputLabel value="Payment Type "/>
+							<p:selectOneMenu value="#{sunGlassesSaleBean.order.paymentType}" style="width:170px">
+						            <f:selectItem itemLabel="Credit Card" itemValue="Credit Card" />
+						            <f:selectItem itemLabel="Cash" itemValue="Cash" />					           
+	                        </p:selectOneMenu>
+	                        <p:outputLabel value=""/>
+	                        
+							<p:outputLabel value="Order Date "/>
+							<p:calendar value="#{sunGlassesSaleBean.order.orderdate}" id="date" size="12" placeholder="Order Date"
+							required="true" requiredMessage="Order date is missing!"/>	
+							<p:message for="date" closable="true">
+								<p:autoUpdate />
+							</p:message>														
+							
+							<p:outputLabel value=""/>												
+							<p:commandButton value="Save" id="mybutton" binding="#{sunGlassesSaleBean.mybutton}" action="#{sunGlassesSaleBean.save()}" 
+							ajax="false"/>
+							<p:outputLabel value=""/>
+						</h:panelGrid>				
+					</div>
+				</div>
+			
+				<div class="col-9 col-s-8">
+										
+					
+					<div class="row border_div">												
+                        
+                         <h:panelGrid columns="5" cellpadding="5">
+						    	<p:inputText value="#{sunGlassesSaleBean.sunglasses.barcode_number}" size="11" placeholder="Barcode"
+						    	required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+       							<p:inputText value="#{sunGlassesSaleBean.sunglasses.brand}" size="11" placeholder="Brand"
+       							required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+       							<p:outputLabel value="Remove from storage" />
+       							<p:selectBooleanCheckbox value="#{sunGlassesSaleBean.sunglasses_storage}"/>   							
+       							<p:outputLabel value="" />
+       							
+       							<p:inputText value="#{sunGlassesSaleBean.sunglasses.sunglasses_modelcode}" size="11" placeholder="Model Code"
+       							required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+       							<p:inputText value="#{sunGlassesSaleBean.sunglasses.sunglasses_colorcode}" size="11" placeholder="Color Code"
+       							required="true" requiredMessage="Please fill the required areas!" update=":form:msg"/>
+      				
+						 </h:panelGrid>
+                                                                                                                 
+					</div>
+					
+						  
+				</div>
+			
+			</div>
+									
+				
+			</h:form>	
+			</ui:define>
+
+	</ui:composition>
+</html>

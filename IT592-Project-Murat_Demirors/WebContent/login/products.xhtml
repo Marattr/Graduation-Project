@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+		<ui:define name="pageTitle">Products</ui:define>
+		
+			<ui:define name="maincontent">
+				<h:form id="form">
+								
+					<center><h3>Stored Products</h3>
+					
+					<p:accordionPanel id="accopanel">
+				        <p:tab title="Glasses">
+				            <p:dataTable id="glass2" var="glass" value="#{productsBean.glasses}" rows="10" class="font_size"
+			                 paginator="true"
+			                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			                 rowsPerPageTemplate="5,10,15">
+			                 
+					        <p:column headerText="Sphere">
+					        	<h:outputText value="+" rendered="#{glass.number_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!glass.number_sferik_konkav}" />
+					            <h:outputText value="#{glass.number}" />
+					        </p:column>
+					 
+					        <p:column headerText="CYL">
+					            <h:outputText value="+" rendered="#{glass.number_cyl_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!glass.number_cyl_sferik_konkav}" />
+					            <h:outputText value="#{glass.number_cyl}" />
+					        </p:column>	
+					        
+					        <p:column headerText="Antirefle">
+					            <h:outputText value="Antirefle" rendered="#{glass.antirefle}" />
+					            <h:outputText value="None" rendered="#{!glass.antirefle}" />
+					        </p:column>								      
+					 
+					 		<p:column headerText="Color">
+					            <h:outputText value="#{glass.color}" />
+					        </p:column>
+					        
+					        <p:column headerText="Type">
+					            <h:outputText value="#{glass.type}" />
+					        </p:column>
+					        
+					         <p:column headerText="Barcode Number">
+					            <h:outputText value="#{glass.barcode_number}" />
+					        </p:column>
+					 
+					        <p:column headerText="Brand">
+					            <h:outputText value="#{glass.brand}" />
+					        </p:column>
+					        
+					        <p:column headerText="Personel">
+					            <h:outputText value="#{glass.productPersonel.username}" />
+					        </p:column>
+					        
+					        <p:column headerText="Added to storage">
+					            <h:outputText value="#{glass.addedDate}" />
+					        </p:column>
+					        
+					        <p:column headerText="Delete">
+					            <p:commandLink action="#{productsBean.setIds(glass.id)}" value="Delete Product" onclick="PF('deleteConfirmDlg').show()"/>
+					        </p:column>					        					        
+					        					        					        				        
+					    </p:dataTable>
+				        </p:tab>
+				        <p:tab title="Eyeglasses">
+				            <p:dataTable id="eyeglasses2" var="eyeglasses" value="#{productsBean.eyeglasses}" rows="10" class="font_size"
+			                 paginator="true"
+			                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			                 rowsPerPageTemplate="5,10,15">
+			                 								      
+					 
+					 		<p:column headerText="Color Code">
+					            <h:outputText value="#{eyeglasses.eyeglasses_colorcode}" />
+					        </p:column>
+					        
+					        <p:column headerText="Model Code">
+					            <h:outputText value="#{eyeglasses.eyeglasses_modelcode}" />
+					        </p:column>
+					        
+					         <p:column headerText="Barcode Number">
+					            <h:outputText value="#{eyeglasses.barcode_number}" />
+					        </p:column>
+					 
+					        <p:column headerText="Brand">
+					            <h:outputText value="#{eyeglasses.brand}" />
+					        </p:column>
+					        
+					        <p:column headerText="Personel">
+					            <h:outputText value="#{eyeglasses.productPersonel.username}" />
+					        </p:column>
+					        
+					        <p:column headerText="Delete">
+					            <p:commandLink action="#{productsBean.setIds(eyeglasses.id)}" value="Delete Product" onclick="PF('deleteConfirmDlg2').show()"/>
+					        </p:column>					        				       
+					        					        					        				        
+					    </p:dataTable>
+				        </p:tab>
+				        <p:tab title="Lenses">
+				            <p:dataTable id="lens2" var="lens" value="#{productsBean.lenses}" rows="10" class="font_size"
+			                 paginator="true"
+			                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			                 rowsPerPageTemplate="5,10,15">
+			                 								      					 
+					 		<p:column headerText="Sphere">
+					        	<h:outputText value="+" rendered="#{lens.number_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!lens.number_sferik_konkav}" />
+					            <h:outputText value="#{lens.number}" />
+					        </p:column>
+					 
+					        <p:column headerText="CYL">
+					            <h:outputText value="+" rendered="#{lens.number_cyl_sferik_konkav}" />
+					        	<h:outputText value="-" rendered="#{!lens.number_cyl_sferik_konkav}" />
+					            <h:outputText value="#{lens.number_cyl}" />
+					        </p:column>	
+					        
+					         <p:column headerText="Barcode Number">
+					            <h:outputText value="#{lens.barcode_number}" />
+					        </p:column>
+					 
+					        <p:column headerText="Brand">
+					            <h:outputText value="#{lens.brand}" />
+					        </p:column>
+					        
+					        <p:column headerText="Personel">
+					            <h:outputText value="#{lens.productPersonel.username}" />
+					        </p:column>
+					        
+					         <p:column headerText="Delete">
+					            <p:commandLink action="#{productsBean.setIds(lens.id)}" value="Delete Product" onclick="PF('deleteConfirmDlg4').show()"/>
+					        </p:column>
+					        					        					        					        					        					        
+					    </p:dataTable>
+				        </p:tab>
+				        <p:tab title="Sunglasses">
+				        	<p:dataTable id="sunglasses2" var="sunglasses" value="#{productsBean.sunglasses}" rows="10" class="font_size"
+			                 paginator="true"
+			                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			                 rowsPerPageTemplate="5,10,15">
+			                 								      
+					 
+					 		<p:column headerText="Color Code">
+					            <h:outputText value="#{sunglasses.sunglasses_colorcode}" />
+					        </p:column>
+					        
+					        <p:column headerText="Model Code">
+					            <h:outputText value="#{sunglasses.sunglasses_modelcode}" />
+					        </p:column>
+					        
+					         <p:column headerText="Barcode Number">
+					            <h:outputText value="#{sunglasses.barcode_number}" />
+					        </p:column>
+					 
+					        <p:column headerText="Brand">
+					            <h:outputText value="#{sunglasses.brand}" />
+					        </p:column>
+					        
+					        <p:column headerText="Personel">
+					            <h:outputText value="#{sunglasses.productPersonel.username}" />
+					        </p:column>
+					        
+					        <p:column headerText="Delete">
+					            <p:commandLink action="#{productsBean.setIds(sunglasses.id)}" value="Delete Product" onclick="PF('deleteConfirmDlg3').show()"/>
+					        </p:column>					        					        
+					        					        					        					        
+					    </p:dataTable>
+				        </p:tab>
+				    </p:accordionPanel>	
+				    </center>																    
+			    </h:form>
+			    
+			    <p:confirmDialog id="deleteConfirmDialog" message="Are you sure?" header="Delete Product" severity="alert" widgetVar="deleteConfirmDlg">
+	                 <h:form>
+	                 <p:commandButton id="confirmDelete" value="Yes" oncomplete="PF('deleteConfirmDlg').hide()" update=":form:accopanel:glass2" actionListener="#{productsBean.removeProduct()}"/>
+	                 <p:commandButton id="declineDelete" value="No" onclick="PF('deleteConfirmDlg').hide()" type="button"/>
+	                 </h:form>
+	             </p:confirmDialog>
+	             
+	              <p:confirmDialog id="deleteConfirmDialog2" message="Are you sure?" header="Delete Product" severity="alert" widgetVar="deleteConfirmDlg2">
+	                 <h:form>
+	                 <p:commandButton id="confirmDelete2" value="Yes" oncomplete="PF('deleteConfirmDlg2').hide()" update=":form:accopanel:eyeglasses2" actionListener="#{productsBean.removeProduct()}"/>
+	                 <p:commandButton id="declineDelete2" value="No" onclick="PF('deleteConfirmDlg2').hide()" type="button"/>
+	                 </h:form>
+	             </p:confirmDialog>
+	             
+	              <p:confirmDialog id="deleteConfirmDialog3" message="Are you sure?" header="Delete Product" severity="alert" widgetVar="deleteConfirmDlg3">
+	                 <h:form>
+	                 <p:commandButton id="confirmDelete3" value="Yes" oncomplete="PF('deleteConfirmDlg3').hide()" update=":form:accopanel:sunglasses2" actionListener="#{productsBean.removeProduct()}"/>
+	                 <p:commandButton id="declineDelete3" value="No" onclick="PF('deleteConfirmDlg3').hide()" type="button"/>
+	                 </h:form>
+	             </p:confirmDialog>
+             	
+             	<p:confirmDialog id="deleteConfirmDialog4" message="Are you sure?" header="Delete Product" severity="alert" widgetVar="deleteConfirmDlg4">
+	                 <h:form>
+	                 <p:commandButton id="confirmDelete4" value="Yes" oncomplete="PF('deleteConfirmDlg4').hide()" update=":form:accopanel:lens2" actionListener="#{productsBean.removeProduct()}"/>
+	                 <p:commandButton id="declineDelete4" value="No" onclick="PF('deleteConfirmDlg4').hide()" type="button"/>
+	                 </h:form>
+	             </p:confirmDialog>
+	             
+	            
+
+			</ui:define>
+
+	</ui:composition>
+</html>

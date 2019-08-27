@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+     		
+<h:head>
+<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
+<link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/img/gozluk.ico"/>
+<h:outputStylesheet library="css" name="it592_main.css"/>	
+</h:head>
+
+<h:body>
+
+	
+	<div class="top">
+		<h:link outcome="index" rendered="#{!loginBean.loggedin}"><img src="resources/img/mainpicture.png" class="main_picture"></img></h:link>
+		<h:link outcome="home" rendered="#{loginBean.loggedin}"><img src="#{request.contextPath}/resources/img/mainpicture.png" class="main_picture"></img></h:link>
+		<h4><b><i><h:outputText value="#{loginBean.shopname}" rendered="#{loginBean.loggedin}"/></i></b></h4>
+		<h4><h:outputText value="Welcome " rendered="#{loginBean.loggedin}"/><b><i><h:outputText value=" #{loginBean.username}" rendered="#{loginBean.loggedin}"/></i></b></h4>
+	</div>			 
+	 
+   <div class="navbar">	 
+   <h:form>   
+	  <h:link value = "Home" outcome = "index" rendered="#{!loginBean.loggedin}"/>
+	  <h:link value = "ShopRegister" outcome = "shopregister" rendered="#{!loginBean.loggedin}"/>
+	  <h:link value = "Home" outcome = "home" rendered="#{loginBean.loggedin}"/>
+	  <h:link value = "UserRegister" outcome = "register" rendered="#{!loginBean.loggedin}"/>
+	  <h:link value = "Login" outcome = "login" rendered="#{!loginBean.loggedin}"/>
+	  <h:link value = "Sales" outcome = "sales" rendered="#{loginBean.loggedin}"/>
+	  <h:link value = "Products" outcome = "products" rendered="#{loginBean.loggedin}"/>
+	  <h:link value = "Prescription Sale" outcome = "prescriptionsale" rendered="#{loginBean.loggedin}"/>
+	  <h:link value = "Lens Sale" outcome = "lenssale" rendered="#{loginBean.loggedin}"/>
+	  <h:link value = "Sunglasses Sale" outcome = "sunglassessale" rendered="#{loginBean.loggedin}"/>
+	  <h:link value = "Add Product" outcome = "addproduct" rendered="#{loginBean.loggedin}"/>
+	  <h:link value = "Income" outcome = "income" rendered="#{loginBean.loggedin}"/>
+	  <h:link value = "Edit Shop/Personnel" outcome = "editshopuser" rendered="#{loginBean.loggedin}"/>
+	  
+	  <h:commandLink action="#{loginBean.logout()}" value="Logout" rendered="#{loginBean.loggedin}" /> 	  
+	</h:form> 			 
+	</div>		  			 	  
+	
+	<div class="bodyheight"> 
+		<br />
+		<ui:insert name="maincontent"/>		
+	</div>
+	
+	<div class="footer">
+		<h5>Copyright 2019, Murat DEMIRORS</h5>
+	</div>
+	
+
+</h:body>
+		
+</html>

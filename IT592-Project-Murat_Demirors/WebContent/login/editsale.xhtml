@@ -1,0 +1,981 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+		<ui:define name="pageTitle">Edit Sale</ui:define>
+		
+			<ui:define name="maincontent">
+			<h:form id="form">
+			<p:growl id="msgs" showDetail="true"/>
+			<center><h2>Sale Information </h2></center>
+			    	<p:dataTable id="sale" var="sale" value="#{editSaleBean.sale}" editable="true" editMode="cell" 
+								widgetVar="cellSale" class="font_size" >
+			    		
+			    		<p:ajax event="cellEdit" listener="#{editSaleBean.onCellEdit}" update=":form:msgs" />
+			    		
+		    			<f:facet name="header">
+				            Customer Information
+				        </f:facet>
+				        
+				        <p:column headerText="Hospital" rendered="#{'SunGlasses' != editSaleBean.sunglasses.productCategory.categoryName}">
+				            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sale.hospital}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{sale.hospital}" /></f:facet>
+				             </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Doctor Name" rendered="#{'SunGlasses' != editSaleBean.sunglasses.productCategory.categoryName}">
+				            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sale.doctorName}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{sale.doctorName}" /></f:facet>
+				             </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Dr.Certificate No" rendered="#{'SunGlasses' != editSaleBean.sunglasses.productCategory.categoryName}">
+				            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sale.doctorCode}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{sale.doctorCode}" /></f:facet>
+				             </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Prescription Date" rendered="#{'SunGlasses' != editSaleBean.sunglasses.productCategory.categoryName}">
+				            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sale.date}" /></f:facet>
+				                   <f:facet name="input"><p:calendar value="#{sale.date}"/></f:facet>
+				             </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Sales Date">
+				            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sale.orderdate}" /></f:facet>
+				                   <f:facet name="input"><p:calendar value="#{sale.orderdate}"/></f:facet>
+				             </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Customer Name">				            
+				            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sale.customerOrder.name}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{sale.customerOrder.name}" /></f:facet>
+				             </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Customer LastName">				            
+				            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sale.customerOrder.lastname}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{sale.customerOrder.lastname}" /></f:facet>
+				             </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Customer Phone">
+				            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sale.customerOrder.phonenumber}" /></f:facet>
+				                   <f:facet name="input"><p:inputMask value="#{sale.customerOrder.phonenumber}" mask="(999) 999-99-99"/></f:facet>
+				               </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Customer TC ID">
+				            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sale.customerOrder.tc_id_number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{sale.customerOrder.tc_id_number}" /></f:facet>
+				             </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Total Bill">
+				            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sale.totalbill}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{sale.totalbill}" /></f:facet>
+				             </p:cellEditor>
+				        </p:column>
+				        
+			        </p:dataTable>
+			        <p:contextMenu for="sale" widgetVar="cMenu">   
+				        <p:menuitem value="Edit Cell" onclick="PF('cellSale').showCellEditor();return false;"/>  
+				        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+				    </p:contextMenu>
+				    
+			        <p:dataTable id="customerAddress" var="address" value="#{editSaleBean.customerAddress}" editable="true" editMode="cell" 
+								widgetVar="cellCustomerAddress" class="font_size" >
+							<p:ajax event="cellEdit" listener="#{editSaleBean.onCellEdit2}" update=":form:msgs" />
+							
+							<f:facet name="header">
+					            Customer Address Information
+					        </f:facet>
+					        
+							<p:column headerText="Country">
+				               <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{address.country}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{address.country}"/></f:facet>
+				               </p:cellEditor>
+				           </p:column>
+				           
+				           <p:column headerText="City">
+				               <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{address.city}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{address.city}"/></f:facet>
+				               </p:cellEditor>
+				           </p:column>
+				           
+				            <p:column headerText="District">
+				               <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{address.district}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{address.district}"/></f:facet>
+				               </p:cellEditor>
+				           </p:column>
+				           
+				           <p:column headerText="Street">
+				               <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{address.street}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{address.street}"/></f:facet>
+				               </p:cellEditor>
+				           </p:column>
+				           
+				            <p:column headerText="Postcode">
+				               <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{address.postcode}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{address.postcode}"/></f:facet>
+				               </p:cellEditor>
+				           </p:column>				           				          
+				           
+						</p:dataTable>
+						<p:contextMenu for="customerAddress" widgetVar="cMenu">   
+					        <p:menuitem value="Edit Cell" onclick="PF('cellCustomerAddress').showCellEditor();return false;"/>  
+					        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+					    </p:contextMenu> 
+									
+				   
+			        <hr class="custom_hr"/>
+					
+					<div class="row">
+					<h:panelGroup rendered="#{'EyeGlasses' == editSaleBean.eyeglasses.productCategory.categoryName}" >
+					<center>
+										
+						<p:dataTable id="eyeglasses" var="eyeglasses" value="#{editSaleBean.eyeglasses}" style="width:60%;" class="font_size" editable="true" 
+						editMode="cell" widgetVar="cellEyeGlasses">
+						
+							<p:ajax event="cellEdit" listener="#{editSaleBean.onCellEdit3}" update=":form:msgs" />
+							
+							<f:facet name="header">
+					            Eyeglasses
+					        </f:facet>
+					        
+					        <p:column headerText="Barcode">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{eyeglasses.barcode_number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{eyeglasses.barcode_number}" /></f:facet>
+				               </p:cellEditor>				        	
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{eyeglasses.brand}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{eyeglasses.brand}" /></f:facet>
+				               </p:cellEditor>				        	
+					        </p:column>
+					        
+					        <p:column headerText="Model Code">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{eyeglasses.eyeglasses_modelcode}" />	</f:facet>
+				                   <f:facet name="input"><p:inputText value="#{eyeglasses.eyeglasses_modelcode}" /></f:facet>
+				               </p:cellEditor>			        	
+					        </p:column>
+					        
+					        <p:column headerText="Color Code">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{eyeglasses.eyeglasses_colorcode}" />	</f:facet>
+				                   <f:facet name="input"><p:inputText value="#{eyeglasses.eyeglasses_colorcode}" /></f:facet>
+				               </p:cellEditor>			        	
+					        </p:column>					   					        
+					      
+				        </p:dataTable>
+				        <p:contextMenu for="eyeglasses" widgetVar="cMenu" >   
+					        <p:menuitem value="Edit Cell" onclick="PF('cellEyeGlasses').showCellEditor();return false;"/>  
+					        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+					    </p:contextMenu> 
+					    
+				     </center>
+						<div class="col-6 col-s-12">
+						
+							<p:dataTable id="glassright" var="glass" value="#{editSaleBean.right_eye}" class="font_size" editable="true" 
+						editMode="cell" widgetVar="cellGlassRight">
+						
+							<p:ajax event="cellEdit" listener="#{editSaleBean.onCellEdit4}" update=":form:msgs" />
+							
+							<f:facet name="header">
+					            Right Eye
+					        </f:facet>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{glass.number_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!glass.number_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{glass.number_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="Sphere" style="width:70px">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{glass.number_cyl_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!glass.number_cyl_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{glass.number_cyl_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="CYL" style="width:50px;">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.number_cyl}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.number_cyl}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Axis" style="width:50px;">			            
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.aks}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.aks}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Antirefle">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="Antirefle" rendered="#{glass.antirefle}" />
+					            		<h:outputText value="None" rendered="#{!glass.antirefle}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.antirefle}" style="width:125px">
+								            <f:selectItem itemLabel="None" itemValue="#{false}" />
+								            <f:selectItem itemLabel="Antirefle" itemValue="#{true}" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>        
+					        </p:column>
+					        
+					        <p:column headerText="Type">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="#{glass.type}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.type}" style="width:125px">
+								            <f:selectItem itemLabel="Mineral" itemValue="Mineral" />
+								            <f:selectItem itemLabel="Organik" itemValue="Organik" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Color">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="#{glass.color}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.color}" style="width:125px">
+								            <f:selectItem itemLabel="White" itemValue="White" />
+								            <f:selectItem itemLabel="Colormatic" itemValue="Colormatic" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					             <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.brand}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.brand}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.barcode_number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.barcode_number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:contextMenu for="glassright" widgetVar="cMenu" >   
+					        <p:menuitem value="Edit Cell" onclick="PF('cellGlassRight').showCellEditor();return false;"/>  
+					        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+					    </p:contextMenu>
+					      
+				        </p:dataTable>
+						</div>												
+						
+						<div class="col-6 col-s-12">
+							<p:dataTable id="glassleft" var="glass" value="#{editSaleBean.left_eye}" class="font_size" editable="true" 
+						editMode="cell" widgetVar="cellGlassLeft">
+						
+							<p:ajax event="cellEdit" listener="#{editSaleBean.onCellEdit5}" update=":form:msgs" />
+							
+							<f:facet name="header">
+					            Left Eye
+					        </f:facet>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{glass.number_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!glass.number_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{glass.number_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="Sphere" style="width:70px">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{glass.number_cyl_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!glass.number_cyl_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{glass.number_cyl_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="CYL" style="width:50px;">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.number_cyl}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.number_cyl}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Axis" style="width:50px;">			            
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.aks}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.aks}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Antirefle">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="Antirefle" rendered="#{glass.antirefle}" />
+					            		<h:outputText value="None" rendered="#{!glass.antirefle}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.antirefle}" style="width:125px">
+								            <f:selectItem itemLabel="None" itemValue="#{false}" />
+								            <f:selectItem itemLabel="Antirefle" itemValue="#{true}" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>        
+					        </p:column>
+					        
+					        <p:column headerText="Type">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="#{glass.type}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.type}" style="width:125px">
+								            <f:selectItem itemLabel="Mineral" itemValue="Mineral" />
+								            <f:selectItem itemLabel="Organik" itemValue="Organik" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Color">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="#{glass.color}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.color}" style="width:125px">
+								            <f:selectItem itemLabel="White" itemValue="White" />
+								            <f:selectItem itemLabel="Colormatic" itemValue="Colormatic" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					             <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.brand}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.brand}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.barcode_number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.barcode_number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:contextMenu for="glassleft" widgetVar="cMenu" >   
+					        <p:menuitem value="Edit Cell" onclick="PF('cellGlassLeft').showCellEditor();return false;"/>  
+					        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+					    </p:contextMenu>
+					      
+				        </p:dataTable>
+				        
+						</div>										
+						
+						</h:panelGroup>
+						
+						<h:panelGroup rendered="#{'EyeGlasses' == editSaleBean.eyeglasses_reading.productCategory.categoryName}">
+						
+						<hr class="custom_hr"/>
+						<center>
+						<p:dataTable id="eyeglassesreading" var="eyeglasses" value="#{editSaleBean.eyeglasses_reading}" style="width:60%;" class="font_size" editable="true" 
+						editMode="cell" widgetVar="cellEyeGlassesReading">
+						
+							<p:ajax event="cellEdit" listener="#{editSaleBean.onCellEdit6}" update=":form:msgs" />
+							
+							<f:facet name="header">
+					            Eyeglasses
+					        </f:facet>
+					        
+					        <p:column headerText="Barcode">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{eyeglasses.barcode_number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{eyeglasses.barcode_number}" /></f:facet>
+				               </p:cellEditor>				        	
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{eyeglasses.brand}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{eyeglasses.brand}" /></f:facet>
+				               </p:cellEditor>				        	
+					        </p:column>
+					        
+					        <p:column headerText="Model Code">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{eyeglasses.eyeglasses_modelcode}" />	</f:facet>
+				                   <f:facet name="input"><p:inputText value="#{eyeglasses.eyeglasses_modelcode}" /></f:facet>
+				               </p:cellEditor>			        	
+					        </p:column>
+					        
+					        <p:column headerText="Color Code">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{eyeglasses.eyeglasses_colorcode}" />	</f:facet>
+				                   <f:facet name="input"><p:inputText value="#{eyeglasses.eyeglasses_colorcode}" /></f:facet>
+				               </p:cellEditor>			        	
+					        </p:column>					   					        
+					      
+				        </p:dataTable>
+				        <p:contextMenu for="eyeglassesreading" widgetVar="cMenu" >   
+					        <p:menuitem value="Edit Cell" onclick="PF('cellEyeGlassesReading').showCellEditor();return false;"/>  
+					        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+					    </p:contextMenu> 
+				        </center>
+				        
+						<div class="col-6 col-s-12">
+						
+						<p:dataTable id="glassrightreading" var="glass" value="#{editSaleBean.right_eye_reading}" class="font_size" editable="true" 
+						editMode="cell" widgetVar="cellRightReading">
+						
+							<p:ajax event="cellEdit" listener="#{editSaleBean.onCellEdit7}" update=":form:msgs" />
+							
+							<f:facet name="header">
+					            Right Eye
+					        </f:facet>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{glass.number_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!glass.number_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{glass.number_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="Sphere" style="width:70px">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{glass.number_cyl_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!glass.number_cyl_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{glass.number_cyl_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="CYL" style="width:50px;">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.number_cyl}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.number_cyl}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Axis" style="width:50px;">			            
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.aks}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.aks}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Antirefle">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="Antirefle" rendered="#{glass.antirefle}" />
+					            		<h:outputText value="None" rendered="#{!glass.antirefle}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.antirefle}" style="width:125px">
+								            <f:selectItem itemLabel="None" itemValue="#{false}" />
+								            <f:selectItem itemLabel="Antirefle" itemValue="#{true}" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>        
+					        </p:column>
+					        
+					        <p:column headerText="Type">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="#{glass.type}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.type}" style="width:125px">
+								            <f:selectItem itemLabel="Mineral" itemValue="Mineral" />
+								            <f:selectItem itemLabel="Organik" itemValue="Organik" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Color">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="#{glass.color}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.color}" style="width:125px">
+								            <f:selectItem itemLabel="White" itemValue="White" />
+								            <f:selectItem itemLabel="Colormatic" itemValue="Colormatic" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					             <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.brand}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.brand}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.barcode_number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.barcode_number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:contextMenu for="glassrightreading" widgetVar="cMenu" >   
+					        <p:menuitem value="Edit Cell" onclick="PF('cellRightReading').showCellEditor();return false;"/>  
+					        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+					    </p:contextMenu>
+					      
+				        </p:dataTable>
+						</div>
+						<div class="col-6 col-s-12">
+						<p:dataTable id="glassleftreading" var="glass" value="#{editSaleBean.left_eye_reading}" class="font_size" editable="true" 
+						editMode="cell" widgetVar="cellLeftReading">
+						
+							<p:ajax event="cellEdit" listener="#{editSaleBean.onCellEdit8}" update=":form:msgs" />
+							
+							<f:facet name="header">
+					            Right Eye
+					        </f:facet>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{glass.number_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!glass.number_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{glass.number_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="Sphere" style="width:70px">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{glass.number_cyl_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!glass.number_cyl_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{glass.number_cyl_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="CYL" style="width:50px;">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.number_cyl}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.number_cyl}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Axis" style="width:50px;">			            
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.aks}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.aks}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Antirefle">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="Antirefle" rendered="#{glass.antirefle}" />
+					            		<h:outputText value="None" rendered="#{!glass.antirefle}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.antirefle}" style="width:125px">
+								            <f:selectItem itemLabel="None" itemValue="#{false}" />
+								            <f:selectItem itemLabel="Antirefle" itemValue="#{true}" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>        
+					        </p:column>
+					        
+					        <p:column headerText="Type">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="#{glass.type}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.type}" style="width:125px">
+								            <f:selectItem itemLabel="Mineral" itemValue="Mineral" />
+								            <f:selectItem itemLabel="Organik" itemValue="Organik" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Color">
+					            <p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="#{glass.color}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		<p:selectOneMenu value="#{glass.color}" style="width:125px">
+								            <f:selectItem itemLabel="White" itemValue="White" />
+								            <f:selectItem itemLabel="Colormatic" itemValue="Colormatic" />					           
+			                            </p:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					             <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.brand}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.brand}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{glass.barcode_number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{glass.barcode_number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:contextMenu for="glassleftreading" widgetVar="cMenu" >   
+					        <p:menuitem value="Edit Cell" onclick="PF('cellLeftReading').showCellEditor();return false;"/>  
+					        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+					    </p:contextMenu>
+					      
+				        </p:dataTable>
+						</div>
+						</h:panelGroup>
+						
+						<h:panelGroup rendered="#{'Lens' == editSaleBean.right_eye_lens.productCategory.categoryName}">
+						<center><h3>Lens</h3></center>
+						<div class="col-6 col-s-12">
+						
+						<p:dataTable id="lensright" var="lens" value="#{editSaleBean.right_eye_lens}" class="font_size" editable="true" 
+						editMode="cell" widgetVar="cellLensRight">
+						
+							<p:ajax event="cellEdit" listener="#{editSaleBean.onCellEdit9}" update=":form:msgs" />
+							
+							<f:facet name="header">
+					            Right Eye
+					        </f:facet>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{lens.number_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!lens.number_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{lens.number_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="Sphere" style="width:70px">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{lens.number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{lens.number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{lens.number_cyl_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!lens.number_cyl_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{lens.number_cyl_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="CYL" style="width:50px;">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{lens.number_cyl}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{lens.number_cyl}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Axis" style="width:50px;">			            
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{lens.aks}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{lens.aks}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>					        				        
+					        
+					        <p:column headerText="Brand">
+					             <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{lens.brand}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{lens.brand}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{lens.barcode_number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{lens.barcode_number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:contextMenu for="lensright" widgetVar="cMenu" >   
+					        <p:menuitem value="Edit Cell" onclick="PF('cellLensRight').showCellEditor();return false;"/>  
+					        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+					    </p:contextMenu>
+					      
+				        </p:dataTable>
+						</div>
+						<div class="col-6 col-s-12">
+						<p:dataTable id="lensleft" var="lens" value="#{editSaleBean.left_eye_lens}" class="font_size" editable="true" 
+						editMode="cell" widgetVar="cellLensLeft">
+						
+							<p:ajax event="cellEdit" listener="#{editSaleBean.onCellEdit10}" update=":form:msgs" />
+							
+							<f:facet name="header">
+					            Left Eye
+					        </f:facet>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{lens.number_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!lens.number_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{lens.number_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="Sphere" style="width:70px">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{lens.number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{lens.number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="+/-" style="width:40px;">				        	
+					        	<p:cellEditor>
+				                   <f:facet name="output">
+				                   		<h:outputText value="+" rendered="#{lens.number_cyl_sferik_konkav}" />
+					        			<h:outputText value="-" rendered="#{!lens.number_cyl_sferik_konkav}" />
+				                   </f:facet>
+				                   <f:facet name="input">
+				                   		 <h:selectOneMenu value="#{lens.number_cyl_sferik_konkav}" style="width:60px;">				            
+								            <f:selectItem itemLabel="+" itemValue="#{true}" />
+								            <f:selectItem itemLabel="-" itemValue="#{false}" />					           
+			                            </h:selectOneMenu>
+				                   </f:facet>
+				               </p:cellEditor>					            
+					        </p:column>
+					        
+					        <p:column headerText="CYL" style="width:50px;">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{lens.number_cyl}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{lens.number_cyl}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Axis" style="width:50px;">			            
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{lens.aks}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{lens.aks}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>					        				        
+					        
+					        <p:column headerText="Brand">
+					             <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{lens.brand}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{lens.brand}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:column headerText="Barcode">
+					            <p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{lens.barcode_number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{lens.barcode_number}" /></f:facet>
+				               </p:cellEditor>
+					        </p:column>
+					        
+					        <p:contextMenu for="lensleft" widgetVar="cMenu" >   
+					        <p:menuitem value="Edit Cell" onclick="PF('cellLensLeft').showCellEditor();return false;"/>  
+					        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+					    </p:contextMenu>
+					      
+				        </p:dataTable>
+				        </div>
+				        </h:panelGroup>
+				        
+				        <h:panelGroup rendered="#{'SunGlasses' == editSaleBean.sunglasses.productCategory.categoryName}">												
+						<center>						
+						<p:dataTable id="sun" var="sunglasses" value="#{editSaleBean.sunglasses}" style="width:60%;" class="font_size" editable="true" 
+						editMode="cell" widgetVar="cellSunGlasses">
+						
+							<p:ajax event="cellEdit" listener="#{editSaleBean.onCellEdit11}" update=":form:msgs" />
+							
+							<f:facet name="header">
+					            Sunglasses
+					        </f:facet>
+					        
+					        <p:column headerText="Barcode">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sunglasses.barcode_number}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{sunglasses.barcode_number}" /></f:facet>
+				               </p:cellEditor>				        	
+					        </p:column>
+					        
+					        <p:column headerText="Brand">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sunglasses.brand}" /></f:facet>
+				                   <f:facet name="input"><p:inputText value="#{sunglasses.brand}" /></f:facet>
+				               </p:cellEditor>				        	
+					        </p:column>
+					        
+					        <p:column headerText="Model Code">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sunglasses.sunglasses_modelcode}" />	</f:facet>
+				                   <f:facet name="input"><p:inputText value="#{sunglasses.sunglasses_modelcode}" /></f:facet>
+				               </p:cellEditor>			        	
+					        </p:column>
+					        
+					        <p:column headerText="Color Code">
+					        	<p:cellEditor>
+				                   <f:facet name="output"><h:outputText value="#{sunglasses.sunglasses_colorcode}" />	</f:facet>
+				                   <f:facet name="input"><p:inputText value="#{sunglasses.sunglasses_colorcode}" /></f:facet>
+				               </p:cellEditor>			        	
+					        </p:column>					   					        
+					      
+				        </p:dataTable>
+				        <p:contextMenu for="sun" widgetVar="cMenu" >   
+					        <p:menuitem value="Edit Cell" onclick="PF('cellSunGlasses').showCellEditor();return false;"/>  
+					        <p:menuitem value="Hide Menu" onclick="PF('cMenu').hide()"/>  
+					    </p:contextMenu>
+						
+						</center>
+				        </h:panelGroup>
+					</div>								
+					
+			</h:form>
+			
+			</ui:define>
+
+	</ui:composition>
+</html>

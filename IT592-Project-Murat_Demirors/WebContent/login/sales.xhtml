@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+			
+		<ui:define name="pageTitle">Sales</ui:define>
+		
+			<ui:define name="maincontent">
+			<h:form id="form">
+				<center><h2>Sales Information </h2></center>
+			    <p:dataTable var="sale" value="#{salesBean.sales}" rows="10" 
+			                 paginator="true"
+			                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			                 rowsPerPageTemplate="5,10,15"
+			                 class="font_size"
+			                 id="saleTable">
+			                 
+			        
+			        <p:column headerText="Hospital">
+			            <h:outputText value="#{sale.hospital}" />
+			        </p:column>
+			 
+			        <p:column headerText="Doctor Name">
+			            <h:outputText value="#{sale.doctorName}" />
+			        </p:column>
+			 
+			        <p:column headerText="Prescription Date">
+			            <h:outputText value="#{sale.date}" />
+			        </p:column>
+			 
+			        <p:column headerText="Sales Date">
+			            <h:outputText value="#{sale.orderdate}" />
+			        </p:column>
+			 
+			 		<p:column headerText="Customer Name">
+			            <h:outputText value="#{sale.customerOrder.name} #{sale.customerOrder.lastname}" />
+			        </p:column>
+			        
+			        <p:column headerText="Customer TC ID" >
+			            <h:outputText value="#{sale.customerOrder.tc_id_number}" />
+			        </p:column>
+			        
+			        <p:column headerText="Category">
+			            <h:outputText value="Prescription Sale" rendered="#{'Glass' == sale.products.get(0).productCategory.categoryName}" />
+			            <h:outputText value="Prescription Sale" rendered="#{'EyeGlasses' == sale.products.get(0).productCategory.categoryName}" />
+			            <h:outputText value="Lens Sale" rendered="#{'Lens' == sale.products.get(0).productCategory.categoryName}" />
+			            <h:outputText value="Sunglasses Sale" rendered="#{'SunGlasses' == sale.products.get(0).productCategory.categoryName}" />
+				    </p:column>
+				    
+				    
+				    <p:column headerText="Personel">
+			            <h:outputText value="#{sale.personelOrder.username}" />
+			        </p:column>	  
+			        
+			        <p:column headerText="Total Bill">
+			            <h:outputText value="#{sale.totalbill}" />
+			        </p:column>		
+			        
+			        <p:column headerText="Delete Sale">
+			            <p:commandLink action="#{salesBean.setIds(sale.id,sale.customerOrder.id)}" value="Delete Sale" onclick="PF('deleteConfirmDlg').show()"/>
+			        </p:column>			        			              			        
+			        	
+			        <p:column headerText="Sale Info">
+			         	<h:link outcome="saleinfo" value="Sale Info" >
+			         		<f:param name="customerId" value="#{sale.customerOrder.id}"/>
+			         	</h:link>
+			        </p:column>
+			        
+			        <p:column headerText="Edit Sale">
+			         	<h:link outcome="editsale" value="Edit Sale" >
+			         		<f:param name="customerId" value="#{sale.customerOrder.id}"/>
+			         	</h:link>
+			        </p:column>
+			        
+			    </p:dataTable>			   
+			        			 
+			</h:form>
+			<p:confirmDialog id="deleteConfirmDialog" message="Are you sure?" header="Delete sale" severity="alert" widgetVar="deleteConfirmDlg">
+                 <h:form>
+                 <p:commandButton id="confirmDelete" value="Yes" oncomplete="PF('deleteConfirmDlg').hide()" update=":form:saleTable" actionListener="#{salesBean.deleteSale()}"/>
+                 <p:commandButton id="declineDelete" value="No" onclick="PF('deleteConfirmDlg').hide()" type="button"/>
+                 </h:form>
+             </p:confirmDialog>
+			</ui:define>
+
+	</ui:composition>
+</html>
