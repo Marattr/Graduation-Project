@@ -2,14 +2,19 @@ package edu.sabanciuniv.it592.rs;
 
 import java.util.List;
 
+import edu.sabanciuniv.it592.domain.EyeGlasses;
+import edu.sabanciuniv.it592.domain.Glass;
+import edu.sabanciuniv.it592.domain.Lens;
+import edu.sabanciuniv.it592.domain.SunGlasses;
+
 public class ResultProduct {
 	private int serviceMessageCode;
 	private String serviceMessageText;
 	
-	private List<GlassProxy>glasses;
-	private List<EyeGlassesProxy>eyeglasses;
-	private List<SunGlassesProxy>sunglasses;
-	private List<LensProxy>lenses;
+	private List<Glass>glasses;
+	private List<EyeGlasses>eyeglasses;
+	private List<SunGlasses>sunglasses;
+	private List<Lens>lenses;
 	
 	
 	
@@ -25,30 +30,31 @@ public class ResultProduct {
 	public void setServiceMessageText(String serviceMessageText) {
 		this.serviceMessageText = serviceMessageText;
 	}
-	public List<GlassProxy> getGlasses() {
+	public List<Glass> getGlasses() {
 		return glasses;
 	}
-	public void setGlasses(List<GlassProxy> glasses) {
+	public void setGlasses(List<Glass> glasses) {
 		this.glasses = glasses;
 	}
-	public List<EyeGlassesProxy> getEyeglasses() {
+	public List<EyeGlasses> getEyeglasses() {
 		return eyeglasses;
 	}
-	public void setEyeglasses(List<EyeGlassesProxy> eyeglasses) {
+	public void setEyeglasses(List<EyeGlasses> eyeglasses) {
 		this.eyeglasses = eyeglasses;
 	}
-	public List<SunGlassesProxy> getSunglasses() {
+	public List<SunGlasses> getSunglasses() {
 		return sunglasses;
 	}
-	public void setSunglasses(List<SunGlassesProxy> sunglasses) {
+	public void setSunglasses(List<SunGlasses> sunglasses) {
 		this.sunglasses = sunglasses;
 	}
-	public List<LensProxy> getLenses() {
+	public List<Lens> getLenses() {
 		return lenses;
 	}
-	public void setLenses(List<LensProxy> lenses) {
+	public void setLenses(List<Lens> lenses) {
 		this.lenses = lenses;
 	}
+
 	
 	
 }

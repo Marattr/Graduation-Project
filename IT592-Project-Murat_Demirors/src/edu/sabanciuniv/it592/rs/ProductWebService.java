@@ -32,16 +32,16 @@ public class ProductWebService {
 		List<EyeGlasses>eyeglasses=productService.getEyeglassesByShopname(shopname);
 		List<SunGlasses>sunglasses=productService.getSunglassesByShopname(shopname);
 		
-		List<GlassProxy>glassesproxy=new ArrayList<>();
-		List<LensProxy>lensesproxy=new ArrayList<>();
-		List<EyeGlassesProxy>eyeglassesproxy=new ArrayList<>();
-		List<SunGlassesProxy>sunglassesproxy=new ArrayList<>();
+		List<Glass>glassesproxy=new ArrayList<>();
+		List<Lens>lensesproxy=new ArrayList<>();
+		List<EyeGlasses>eyeglassesproxy=new ArrayList<>();
+		List<SunGlasses>sunglassesproxy=new ArrayList<>();
 		
 		ResultProduct result=new ResultProduct();
 		
 		for(Glass glass:glasses) {
-			GlassProxy g=new GlassProxy();
-			g.setAddedDate(String.valueOf(glass.getAddedDate()));
+			Glass g=new Glass();
+			g.setAddedDate(glass.getAddedDate());
 			g.setAks(glass.getAks());
 			g.setAntirefle(glass.isAntirefle());
 			g.setBarcode_number(glass.getBarcode_number());
@@ -59,8 +59,8 @@ public class ProductWebService {
 		}
 		
 		for(Lens lens:lenses) {			
-			LensProxy l=new LensProxy();
-			l.setAddedDate(String.valueOf(lens.getAddedDate()));
+			Lens l=new Lens();
+			l.setAddedDate(lens.getAddedDate());
 			l.setAks(lens.getAks());
 			l.setBarcode_number(lens.getBarcode_number());
 			l.setBrand(lens.getBrand());
@@ -74,8 +74,8 @@ public class ProductWebService {
 		}
 		
 		for(EyeGlasses e:eyeglasses) {
-			EyeGlassesProxy e2=new EyeGlassesProxy();
-			e2.setAddedDate(String.valueOf(e.getAddedDate()));
+			EyeGlasses e2=new EyeGlasses();
+			e2.setAddedDate(e.getAddedDate());
 			e2.setBarcode_number(e.getBarcode_number());
 			e2.setBrand(e.getBrand());
 			e2.setReading_glasses(e.isReading_glasses());
@@ -85,8 +85,8 @@ public class ProductWebService {
 		}
 		
 		for(SunGlasses s:sunglasses) {
-			SunGlassesProxy s2=new SunGlassesProxy();
-			s2.setAddedDate(String.valueOf(s.getAddedDate()));
+			SunGlasses s2=new SunGlasses();
+			s2.setAddedDate(s.getAddedDate());
 			s2.setBarcode_number(s.getBarcode_number());
 			s2.setBrand(s.getBrand());
 			s2.setSunglasses_colorcode(s.getSunglasses_colorcode());

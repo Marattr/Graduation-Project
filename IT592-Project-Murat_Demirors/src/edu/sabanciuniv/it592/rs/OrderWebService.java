@@ -87,15 +87,15 @@ public class OrderWebService {
 		ResultOrderProducts result=new ResultOrderProducts();
 		
 		List<Product>products=orderService.getOrderProducts(orderId);
-		List<GlassProxy>glasses=new ArrayList<>();
-		List<LensProxy>lenses=new ArrayList<>();
-		List<EyeGlassesProxy>eyeglasses=new ArrayList<>();
-		List<SunGlassesProxy>sunglasses=new ArrayList<>();
+		List<Glass>glasses=new ArrayList<>();
+		List<Lens>lenses=new ArrayList<>();
+		List<EyeGlasses>eyeglasses=new ArrayList<>();
+		List<SunGlasses>sunglasses=new ArrayList<>();
 		
 		for(Product p:products) {
 			if(p.getProductCategory().getCategoryName().equals("Glass")) {
 				Glass glass=(Glass)p;
-				GlassProxy g=new GlassProxy();
+				Glass g=new Glass();
 				g.setAks(glass.getAks());
 				g.setAntirefle(glass.isAntirefle());
 				g.setBarcode_number(glass.getBarcode_number());
@@ -113,7 +113,7 @@ public class OrderWebService {
 				
 			}else if(p.getProductCategory().getCategoryName().equals("Lens")) {
 				Lens lens=(Lens)p;
-				LensProxy l=new LensProxy();
+				Lens l=new Lens();
 				l.setAks(lens.getAks());
 				l.setBarcode_number(lens.getBarcode_number());
 				l.setBrand(lens.getBrand());
@@ -127,7 +127,7 @@ public class OrderWebService {
 				
 			}else if(p.getProductCategory().getCategoryName().equals("SunGlasses")) {
 				SunGlasses s=(SunGlasses)p;
-				SunGlassesProxy s2=new SunGlassesProxy();				
+				SunGlasses s2=new SunGlasses();				
 				s2.setBarcode_number(s.getBarcode_number());
 				s2.setBrand(s.getBrand());
 				s2.setSunglasses_colorcode(s.getSunglasses_colorcode());
@@ -137,7 +137,7 @@ public class OrderWebService {
 				
 			}else if(p.getProductCategory().getCategoryName().equals("EyeGlasses")) {
 				EyeGlasses e=(EyeGlasses)p;
-				EyeGlassesProxy e2=new EyeGlassesProxy();
+				EyeGlasses e2=new EyeGlasses();
 				e2.setBarcode_number(e.getBarcode_number());
 				e2.setBrand(e.getBrand());
 				e2.setReading_glasses(e.isReading_glasses());
